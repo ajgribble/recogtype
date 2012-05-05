@@ -1,0 +1,24 @@
+{% block title %}Signup{% endblock title %}
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend>Signup</legend>
+        {% for field in sform %}
+        <p>
+        {{ field.errors }}
+        {{ field.label_tag|title }}: {{ field }}
+        </p>
+        {% endfor %}
+
+        {% for field in pform %}
+        <p>
+        {{ field.label_tag|title }}: {{ field }}
+        </p>
+        {% endfor %}
+        </fieldset>
+        <p><input type="submit" value="Signup" /></p>
+    </form>
+{% endblock content %}
+
