@@ -58,7 +58,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+''
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -66,9 +66,8 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".   
+    '/home/grib/PythonProjects/recogtype/recogtype/static/',
 )
 
 # List of finder classes that know how to find static files in
@@ -95,12 +94,23 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+# Settings used by Guardian
 ANONYMOUS_USER_ID = -1
+
+# Settings used by Userena
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+USERENA_DEFAULT_PRIVACY = 'closed'
+USERENA_DISABLE_PROFILE_LIST = True
+USERENA_WITHOUT_USERNAMES = True
+USERENA_HIDE_EMAIL = True
+USERENA_SIGNIN_REDIRECT_URL = '/profiles/%(username)s/'
+USERENA_ACTIVATION_REQUIRED = False
+
+# Settings used by Django
 AUTH_PROFILE_MODULE = 'profiles.Profile'
+LOGIN_URL = '/signin'
+LOGOUT_URL = '/signout'
 LOGIN_REDIRECT_URL = '/profiles/%(username)s/'
-LOGIN_URL = '/profiles/signin/'
-LOGOUT_URL = '/profiles/signout/'
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',

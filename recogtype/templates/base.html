@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>{% block title %}{% endblock title %}</title>
+    {% block styles %}
+    <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/reset.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/960.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/style.css" />
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	{% endblock styles %}
+</head>
+<body>
+<div class="container_12">
+    <div id="header" class="grid_12">
+        {% block header %}{% endblock header %}
+    </div><!-- end .grid_12 -->
+	
+    <div id="nav" class="grid_3">
+        {% block nav %}{% endblock nav %}
+    </div>
+
+	<div id="content" class="grid_9">
+	    {% block content %}{% endblock content %}
+    </div><!-- end .grid_9 -->
+
+    <div id="footer" class="grid_12">
+        {% block footer %}{% endblock footer %}
+    </div>
+</div><!-- end .container_12 -->
+</body>
+</html>

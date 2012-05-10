@@ -8,9 +8,19 @@ from django.http import HttpResponseRedirect
 
 from userena.forms import SignupForm
 from userena.decorators import secure_required
-
+from userena import views as userena_views
 from profiles.forms import ProfileForm
 from profiles.models import Profile
+
+from guardian.decorators import permission_required_or_403 
+
+@secure_required
+@permission_required_or_403('change_profile', (get_profile_model(), 
+                            'user__username', 'username')) 
+def profile_edit_mod(request):
+    # Overrides userena's original because last_name is not pulled
+    user_initial = {'first_name': user.first_name}
+
 
 @secure_required
 def signup(request):
@@ -24,11 +34,10 @@ def signup(request):
                                 password=request.POST['password1'])
             pform = ProfileForm(request.POST, instance=Profile())
             if pform.is_valid():
-                import pdb; pdb.set_trace()
                 profile = pform.save(commit=False)
+                profile.user = user
                 import pdb; pdb.set_trace()
-                profile.user = user            
-               # profile = pform.save()
+                profile = pform.save()
 
             redirect_to = reverse('userena_signup_complete',
                                   kwargs={'username': user.username})
@@ -44,4 +53,3 @@ def signup(request):
     return render_to_response('profiles/signup_form.html', {'sform': sform,
                                                                'pform': pform},
                                   context_instance=RequestContext(request))
-
