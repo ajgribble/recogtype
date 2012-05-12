@@ -11,22 +11,47 @@
 	{% endblock styles %}
 </head>
 <body>
-<div class="container_12">
-    <div id="header" class="grid_12">
-        {% block header %}{% endblock header %}
-    </div><!-- end .grid_12 -->
-	
-    <div id="nav" class="grid_3">
-        {% block nav %}{% endblock nav %}
+<div id="header" class="container_12">
+    <div id="icon" class="grid_2">
+        <a href="/">RecogType</a>
+        <em class="base_text">Security at your fingertips</em>
     </div>
+    <div id="nav" class="grid_10">
+        <div id="links" class="base_text horizontal">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">FAQs</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </div>
+        <div id="session_status">
+            {% if user.is_authenticated %}
+            <div class="base_text horizontal">
+                <ul>
+                    <li>{{ user.email }} | not you?</li>
+                    <li><a href="/signout">Signout</a></li>
+                </ul>
+            {% else %}
+                <ul>
+                    <li><a href="/signup">Signup</a></li>
+                    <li><a href="/signin">Signin</a></li>
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+    </div><!-- end #nav -->
+</div><!-- end header -->
 
-	<div id="content" class="grid_9">
-	    {% block content %}{% endblock content %}
-    </div><!-- end .grid_9 -->
+<div id="content" class="container_12"> 
+        {% block content %}{% endblock content %}
+</div>
 
+<div class="container_12">
     <div id="footer" class="grid_12">
         {% block footer %}{% endblock footer %}
     </div>
-</div><!-- end .container_12 -->
+</div>
+
 </body>
 </html>

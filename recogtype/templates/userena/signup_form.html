@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Signup{% endblock title %}
+
+{% block content %}
+<div class="grid_4 push_4">
+<form id="form" action="" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend class="base_text">Signup</legend>
+        {% for field in form %}
+            <div class="form_row">
+            {{ field.errors }}
+            {% comment %} Displaying checkboxes differently {% endcomment %}
+            {% if field.name == 'tos' %}
+                <p class="checkbox">
+                <label for="id_{{ field.name }}" class="base_text">{{ field }} {{ field.label }}</label>
+                </p>
+            {% else %}
+                <label class="base_text">{{ field.label }}</label>
+                {{ field }}
+            {% endif %}
+            </div>
+        {% endfor %}
+        <div class="submit">
+            <input type="submit" value="Signup" />
+        </div>
+    </fieldset>
+</form>
+{% endblock %}
+        
