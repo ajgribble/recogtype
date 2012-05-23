@@ -26,8 +26,8 @@
             </ul>
         </div>
         <div id="session_status">
-            {% if user.is_authenticated %}
             <div class="base_text horizontal">
+            {% if user.is_authenticated %}
                 <ul>
                     <li>{{ user.email }} | not you?</li>
                     <li><a href="/signout">Signout</a></li>
@@ -37,14 +37,14 @@
                     <li><a href="/signup">Signup</a></li>
                     <li><a href="/signin">Signin</a></li>
                 </ul>
-            </div>
             {% endif %}
+            </div>
         </div>
     </div><!-- end #nav -->
 </div><!-- end header -->
 
-<div id="content" class="container_12"> 
-        {% block content %}{% endblock content %}
+<div id="content" class="container_12">
+    {% block content %}{% endblock content %}
 </div>
 
 <div class="container_12">

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock %}
+
+{% block content %} 
+<div id="local_nav" class="grid_2">
+    <nav>
+        <ul>
+            <li><a href="{% url userena_profile_detail user.username %}">View profile</a></li>
+            <li><a href="{% url userena_profile_edit user.username %}">Edit details</a></li>
+            <li><a href="{% url userena_password_change user.username %}">Change password</a></li>
+            <li><a href="{% url userena_email_change user.username %}">Change email</a></li>
+        </ul>
+    </nav>
+</div>
+
+{% block profile_content %}
+{% endblock profile_content %}
+
+{% endblock content %}

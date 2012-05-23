@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Signin | RecogType{% endblock title %}
+
+
+{% block content %}
+
+<div class="grid_4 push_4">
+<form action="" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend class="base_text">Signin</legend>
+        {{ form.non_field_errors }}
+        {% for field in form %}
+            <div class="form_row base_text">
+            {{ field.errors }}
+            {% comment %} Displaying checkboxes differently {% endcomment %}
+            {% if field.name == 'remember_me' %}
+                <div class="label">{{ field }}</div>
+                <p class="base_text">
+                <label for="id_{{ field.name }}">{{ field.label }}</label>
+                </p>
+            {% else %}
+                <div class="label"><label>{{ field.label }}</label></div>
+                {{ field }}
+            {% endif %}
+            </div>
+        {% endfor %}
+        <div class="submit">
+            <input type="submit" value="Signin" />
+        </div>
+        <div class="form_row">
+            <div class="submit"><a class="base_text" href="{% url userena_password_reset %}" title="Forgot your password?">Forgot your password?</a></div>  
+        </div> 
+    </fieldset>
+</form>
+</div>
+{% endblock %}

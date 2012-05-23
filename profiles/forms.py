@@ -8,7 +8,7 @@ from userena.utils import get_profile_model
 
 # Overrides userena's built in profile
 class EditProfileFormMod(forms.ModelForm):
-    first_name = forms.CharField(label=_(u'first Name'),
+    first_name = forms.CharField(label=_(u'First Name'),
                                          max_length=30)
     dob = forms.DateField(widget=SelectDateWidget(years=range(1994,1919,-1)))
     

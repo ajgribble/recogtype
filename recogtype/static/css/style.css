@@ -215,21 +215,178 @@ td { vertical-align: top; }
 
 
 /* ==|== primary styles =====================================================
-   Author:
+   Author: Adam Gribble
    ========================================================================== */
 
+/* ==========================================================================
+   Base Style
+   ========================================================================== */
 
+body
+{ 
+    background: #45484d; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj4KICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM0NTQ4NGQiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L3JhZGlhbEdyYWRpZW50PgogIDxyZWN0IHg9Ii01MCIgeT0iLTUwIiB3aWR0aD0iMTAxIiBoZWlnaHQ9IjEwMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-radial-gradient(center, ellipse cover, #45484d 0%, #000000 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#45484d), color-stop(100%,#000000)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover, #45484d 0%,#000000 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover, #45484d 0%,#000000 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover, #45484d 0%,#000000 100%); /* IE10+ */
+    background: radial-gradient(center, ellipse cover, #45484d 0%,#000000 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=1 ); /* IE6-8 fallback on horizontal gradient */ 
+}
 
+/* Form Styling */
+fieldset
+{
+    border: 1px solid #FFF;
+    padding: 10px;
+}
+form .form_row
+{
+    clear: both;
+    padding: 10px;
+    width: 380px;
+}
+.form_row .label
+{
+    float: left;
+    text-align: right;
+    margin-right: 10px;
+    width: 125px;
+}
+form .form_row .input
+{
+    float: right;
+    text-align: left;
+}
+form .submit
+{
+    text-align: center;
+    margin-top: 10px;
+}
+form #id_mugshot
+{
+    position: relative;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    width: 220px;
+    color: #FFF;
+}
 
+/* ==========================================================================
+   Header
+   ========================================================================== */
+#header
+{
+    margin-top:20px;
+    margin-bottom:20px;
+}
+#header a
+{
+    color: #FFF;
+    margin: 5px;
+    font-size: large;
+    text-decoration: none;
+}
+#header a:hover
+{
+    text-decoration: underline;
+}
+#header .base_text
+{
+    color: #FFF;
+}
+#header #nav
+{
+    height: 80px;
+    border-bottom: 2px solid;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-color: #FFF;
+} 
+#session_status
+{
+    margin:20px;
+    float:right;
+}
+#session_status ul li
+{
+    display:inline;
+}
+#links
+{
+    margin:20px;
+    float:left;
+}
+#links ul li
+{
+    display:inline;
+}
 
+/* ==========================================================================
+   Content
+   ========================================================================== */
 
+#content .container
+{
+    background: #FFF;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 5px 5px 3px #535864;
+    -moz-box-shadow: 5px 5px 3px #535864;
+    -webkit-box-shadow: 5px 5px 3px #535864;
+    text-align: left;
+}
+.container h1, h2, h3, h4, h5, h6, p
+{
+    color: #535864;
+}
+.container > div
+{
+   padding: 20px;
+}
+#content .base_text
+{
+    color: #FFF;
+}
+#content .container a
+{
+    color: #FFF;
+    margin: 5px;
+    font-size: large;
+}
 
+/* ==========================================================================
+   Local Nav
+   ========================================================================== */
 
-
-
-
-
-
+#local_nav ul
+{
+    border-right:2px solid;
+    border-top-right-radius:20px;
+    border-bottom-right-radius:20px;
+    border-color:#FFF;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    list-style-type: none;
+}
+#local_nav a
+{
+    text-decoration: none;
+    color: #FFF;
+    font-size: medium;
+}
+#local_nav a:hover
+{
+    text-decoration: underline;
+}
+#local_nav li
+{
+   margin-top: 5px;
+   margin-bottom: 5px;
+} 
 
 
 

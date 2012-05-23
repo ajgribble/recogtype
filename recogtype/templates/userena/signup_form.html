@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
-{% block title %}Signup{% endblock title %}
+{% block title %}Signup | RecogType{% endblock title %}
 
 {% block content %}
+
 <div class="grid_4 push_4">
 <form id="form" action="" method="post">
     {% csrf_token %}
@@ -17,7 +18,7 @@
                 <label for="id_{{ field.name }}" class="base_text">{{ field }} {{ field.label }}</label>
                 </p>
             {% else %}
-                <label class="base_text">{{ field.label }}</label>
+                <div class="label"><label class="base_text">{{ field.label }}</label></div>
                 {{ field }}
             {% endif %}
             </div>
@@ -27,5 +28,5 @@
         </div>
     </fieldset>
 </form>
+</div>
 {% endblock %}
-        

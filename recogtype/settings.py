@@ -106,6 +106,9 @@ USERENA_HIDE_EMAIL = True
 USERENA_SIGNIN_REDIRECT_URL = '/profiles/%(username)s/'
 USERENA_ACTIVATION_REQUIRED = False
 
+# Settings used by Django-Debug-Toolbar
+INTERNAL_IPS = ('127.0.0.1',)
+
 # Settings used by Django
 AUTH_PROFILE_MODULE = 'profiles.Profile'
 LOGIN_URL = '/signin'
@@ -118,6 +121,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -146,9 +151,11 @@ INSTALLED_APPS = (
     'guardian',
     'easy_thumbnails',
     'south',
+    'debug_toolbar',
 
     # Project Specific Apps
     'profiles',
+    'recogmatch',
 
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',

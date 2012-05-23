@@ -1,0 +1,48 @@
+{% extends 'profiles/profile_base.html' %}
+
+{% block title %}Personal Details | RecogType{% endblock %}
+
+{% block profile_content %}
+<div class="grid_4 push_3">
+    <div class="container">
+        <div id="details">
+            <img src="{{ profile.get_mugshot_url }}" alt="Mugshot" />
+            <br /><br />
+            {% if profile.user.get_full_name %}
+            <p><strong>Name</strong><br /> {{ profile.user.get_full_name }}</p><br />
+            {% endif %}
+            {% if profile.user.email %}
+            <p><strong>Email</strong><br />{{ profile.user.email }}</p><br />
+            {% endif %}
+            {% if profile.dob %}
+            <p><strong>Date of Birth</strong><br /> {{ profile.dob }}</p><br />
+            {% endif %}
+            {% if profile.sex %}
+            <p><strong>Sex</strong><br />
+                {% if profile.sex == 'M' %}
+                    Male
+                {% else %}
+                    Female
+                {% endif %}
+            </p> <br />
+            {% endif %}
+            {% if profile.handed %}
+            <p><strong>Handedness</strong><br /> 
+                {% if profile.handed == 'R' %}
+                    Right
+                {% elif profile.handed == 'L' %}
+                    Left
+                {% else %}
+                    Ambidextrous
+                {% endif %}
+            </p><br />
+            {% endif %}
+            {% if profile.daily_usage %}
+            <p><strong>Daily Computer Usage</strong><br /> 
+                {{ profile.daily_usage }} hours a day
+            </p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

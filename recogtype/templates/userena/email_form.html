@@ -1,0 +1,25 @@
+{% extends 'profiles/profile_base.html' %}
+
+{% block title %}Change Email | RecogType{% endblock %}
+
+{% block profile_content %}
+
+<div class="grid_4 push_2">
+<form action="" method="post">
+    {% csrf_token %}
+    <fieldset>
+    <legend class="base_text">Change email address</legend>
+    {% for field in form %}
+        <div class="form_row base_text">
+            <div class="label"><label for="{{ field.name }}">{{ field.label }}:</div>
+            {{ field }}
+        </div>
+    {% endfor %}
+        <div class="submit">
+            <input type="submit" value="Change email" />
+        </div>
+    </fieldset>
+</form>
+</div>
+
+{% endblock profile_content %}
