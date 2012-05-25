@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard | RecogType{% endblock title %}
+
+{% block content %}
+<div id="local_nav" class="grid_2">
+    <nav>
+        <ul>
+            <li><a href="{% url userena_profile_detail user.username %}">View Profile</a></li>
+            <li><a href="#">View Biometric Template</a></li>
+            <li><a href="#">Train System</a></li>
+            <li><a href="#">Challenges</a></li>
+            <li><a href="#">Help</a></li>
+        </ul>
+    </nav>
+</div>
+{% block recogmatch_content %}
+<div class="grid_8 push_1 container">
+    <div>
+        <h1>Suggested Actions</h1>
+        <p>Action #1</p>
+        <p>Action #2</p>
+        <p>Action #3</p>
+    </div>
+</div> 
+{% endblock recogmatch_content %}
+{% endblock content %}

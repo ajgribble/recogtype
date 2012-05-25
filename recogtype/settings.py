@@ -103,7 +103,7 @@ USERENA_DEFAULT_PRIVACY = 'closed'
 USERENA_DISABLE_PROFILE_LIST = True
 USERENA_WITHOUT_USERNAMES = True
 USERENA_HIDE_EMAIL = True
-USERENA_SIGNIN_REDIRECT_URL = '/profiles/%(username)s/'
+USERENA_SIGNIN_REDIRECT_URL = '/dashboard/%(username)s/'
 USERENA_ACTIVATION_REQUIRED = False
 
 # Settings used by Django-Debug-Toolbar

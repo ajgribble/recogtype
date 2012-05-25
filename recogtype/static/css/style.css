@@ -240,6 +240,7 @@ body
 fieldset
 {
     border: 1px solid #FFF;
+    border-radius: 20px;
     padding: 10px;
 }
 form .form_row
@@ -331,17 +332,14 @@ form #id_mugshot
 
 #content .container
 {
-    background: #FFF;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    box-shadow: 5px 5px 3px #535864;
-    -moz-box-shadow: 5px 5px 3px #535864;
-    -webkit-box-shadow: 5px 5px 3px #535864;
-    text-align: left;
+    border-radius: 20px;
+    border: 1px solid #FFF;
+    text-align: center;
+    color: #8ADE95;
 }
 .container h1, h2, h3, h4, h5, h6, p
 {
-    color: #535864;
+    color: #8ADE95;
 }
 .container > div
 {

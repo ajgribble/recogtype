@@ -34,7 +34,7 @@ urlpatterns = patterns('',
 
     # Directive Package URLs
     url(r'^profiles/', include('userena.urls')),
-    
+    url(r'^dashboard/', include('recogmatch.urls')),   
     
     url(r'^admin/', include(admin.site.urls)),
 )
