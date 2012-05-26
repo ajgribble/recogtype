@@ -335,11 +335,11 @@ form #id_mugshot
     border-radius: 20px;
     border: 1px solid #FFF;
     text-align: center;
-    color: #8ADE95;
+    color: #00FF00;
 }
 .container h1, h2, h3, h4, h5, h6, p
 {
-    color: #8ADE95;
+    color: #00FF00;
 }
 .container > div
 {
@@ -369,6 +369,7 @@ form #id_mugshot
     padding-top: 40px;
     padding-bottom: 40px;
     list-style-type: none;
+    padding-right: 10px;
 }
 #local_nav a
 {

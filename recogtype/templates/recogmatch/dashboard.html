@@ -6,8 +6,8 @@
 <div id="local_nav" class="grid_2">
     <nav>
         <ul>
-            <li><a href="{% url userena_profile_detail user.username %}">View Profile</a></li>
-            <li><a href="#">View Biometric Template</a></li>
+            <li><a href="{% url userena_profile_detail user.username %}">Profile</a></li>
+            <li><a href="#">Biometric Template</a></li>
             <li><a href="#">Train System</a></li>
             <li><a href="#">Challenges</a></li>
             <li><a href="#">Help</a></li>
@@ -17,10 +17,34 @@
 {% block recogmatch_content %}
 <div class="grid_8 push_1 container">
     <div>
-        <h1>Suggested Actions</h1>
-        <p>Action #1</p>
-        <p>Action #2</p>
-        <p>Action #3</p>
+        <h1>Mandatory Tasks:</h1>
+        </br>
+        {% if not name %}
+        <p>Update your account with your first name.</p>
+        {% endif %}
+
+        {% if not dob %}
+        <p>Update your account with your date of birth.</p>
+        {% endif %}
+
+        {% if not sex %}
+        <p>Update your account with your sex.</p>
+        {% endif %}
+
+        {% if not hand %}
+        <p>Update your account with your handedness.</p>
+        {% endif %}
+
+        {% if not use %}
+        <p>Update your account with your average daily computer usage.</p>
+        {% endif %}
+        
+        <br /><br />
+        <h1>Suggested Tasks:</h1>
+        <br />
+        {% if not mug %}
+        <p>Personalize your account with a mugshot</p>
+        {% endif %}
     </div>
 </div> 
 {% endblock recogmatch_content %}
