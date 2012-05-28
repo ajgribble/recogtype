@@ -36,5 +36,5 @@ urlpatterns = patterns('',
     url(r'^profiles/', include('userena.urls')),
     url(r'^dashboard/', include('recogmatch.urls')),   
     
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^recogadmin/', include(admin.site.urls)),
 )

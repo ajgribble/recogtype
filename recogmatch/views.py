@@ -11,36 +11,30 @@ def dash(request, username, template_name='recogmatch/dashboard.html',
          extra_context=None):
 
     # Initialize all variables to false as if they haven't been updated
-    userName = False
-    profileMug = False
-    profileDob = False
-    profileSex = False
-    profileHand = False
-    profileUse = False
+    userObj = {'name': False, 'mug': False, 'dob': False,
+            'sex': False, 'hand': False, 'use': False}
 
     user = User.objects.get(username=username)
     userProfile = Profile.objects.get(user_id=user.id)
     
     if user.first_name != '':
-        userName = True
+        userObj['name'] = True
 
     if userProfile.mugshot != '':
-        profileMug = True
+        userObj['mug'] = True
     
     if userProfile.dob <= date.today()-timedelta(days=6574.32):
-        profileDob = True
+        userObj['dob'] = True
 
     if userProfile.sex != '':
-        profileSex = True
+        userObj['sex'] = True
 
     if userProfile.handed != '':
-        profileHand = True
+        userObj['hand'] = True
 
     if userProfile.daily_usage != '':
-        profileUse = True
+        userObj['use'] = True
 
     return direct_to_template(request,
                               template_name,
-                              {'mug': profileMug, 'dob': profileDob,
-                               'sex': profileSex, 'hand': profileHand,
-                               'use': profileUse, 'name': userName})
+                              userObj)

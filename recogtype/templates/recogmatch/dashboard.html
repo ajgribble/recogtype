@@ -16,36 +16,34 @@
 </div>
 {% block recogmatch_content %}
 <div class="grid_8 push_1 container">
-    <div>
-        <h1>Mandatory Tasks:</h1>
-        </br>
-        {% if not name %}
-        <p>Update your account with your first name.</p>
-        {% endif %}
+    <h1>Mandatory Tasks:</h1>
+    </br>
+    {% if not name %}
+    <p>Update your account with your first name.</p>
+    {% endif %}
 
-        {% if not dob %}
-        <p>Update your account with your date of birth.</p>
-        {% endif %}
+    {% if not dob %}
+    <p>Update your account with your date of birth.</p>
+    {% endif %}
 
-        {% if not sex %}
-        <p>Update your account with your sex.</p>
-        {% endif %}
+    {% if not sex %}
+    <p>Update your account with your sex.</p>
+    {% endif %}
 
-        {% if not hand %}
-        <p>Update your account with your handedness.</p>
-        {% endif %}
+    {% if not hand %}
+    <p>Update your account with your handedness.</p>
+    {% endif %}
 
-        {% if not use %}
-        <p>Update your account with your average daily computer usage.</p>
-        {% endif %}
-        
-        <br /><br />
-        <h1>Suggested Tasks:</h1>
-        <br />
-        {% if not mug %}
-        <p>Personalize your account with a mugshot</p>
-        {% endif %}
-    </div>
+    {% if not use %}
+    <p>Update your account with your average daily computer usage.</p>
+    {% endif %}
+    
+    <br /><br />
+    <h1>Suggested Tasks:</h1>
+    <br />
+    {% if not mug %}
+    <p>Personalize your account with a mugshot</p>
+    {% endif %}
 </div> 
 {% endblock recogmatch_content %}
 {% endblock content %}

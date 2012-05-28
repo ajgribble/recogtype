@@ -321,7 +321,7 @@ form #id_mugshot
     margin:20px;
     float:left;
 }
-#links ul li
+.horizontal ul li
 {
     display:inline;
 }
@@ -330,20 +330,18 @@ form #id_mugshot
    Content
    ========================================================================== */
 
-#content .container
+.container
 {
     border-radius: 20px;
     border: 1px solid #FFF;
     text-align: center;
     color: #00FF00;
+    padding: 20px;
+    min-height: 400px;
 }
 .container h1, h2, h3, h4, h5, h6, p
 {
     color: #00FF00;
-}
-.container > div
-{
-   padding: 20px;
 }
 #content .base_text
 {
@@ -353,7 +351,6 @@ form #id_mugshot
 {
     color: #FFF;
     margin: 5px;
-    font-size: large;
 }
 
 /* ==========================================================================
@@ -387,7 +384,38 @@ form #id_mugshot
    margin-bottom: 5px;
 } 
 
+/* ==========================================================================
+ * Footer
+ * ========================================================================== */
 
+#footer
+{
+    margin-top:10px;
+    margin-bottom:10px;
+    text-align: center;
+}
+#footer a
+{
+    color: #FFF;
+    margin: 5px;
+    font-size: small;
+    text-decoration: none;
+}
+#footer a:hover
+{
+    text-decoration: underline;
+}
+#footer .base_text
+{
+    color: #FFF;
+}
+#footer #nav
+{
+    border-top: 2px solid;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-color: #FFF;
+} 
 
 /* ==|== media queries ======================================================
    EXAMPLE Media Query for Responsive Design.

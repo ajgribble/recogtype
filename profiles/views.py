@@ -15,14 +15,6 @@ from profiles.models import Profile
 from guardian.decorators import permission_required_or_403 
 
 @secure_required
-@permission_required_or_403('change_profile', (get_profile_model(), 
-                            'user__username', 'username')) 
-def profile_edit_mod(request):
-    # Overrides userena's original because last_name is not pulled
-    user_initial = {'first_name': user.first_name}
-
-
-@secure_required
 def signup(request):
     if request.method == "POST":
         sform = SignupForm(request.POST)
