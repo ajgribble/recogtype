@@ -7,7 +7,7 @@
     <nav>
         <ul>
             <li><a href="{% url userena_profile_detail user.username %}">Profile</a></li>
-            <li><a href="#">Biometric Template</a></li>
+            <li><a href="{% url match_template user.username %}">Biometric Template</a></li>
             <li><a href="#">Train System</a></li>
             <li><a href="#">Challenges</a></li>
             <li><a href="#">Help</a></li>

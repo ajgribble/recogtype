@@ -38,3 +38,9 @@ def dash(request, username, template_name='recogmatch/dashboard.html',
     return direct_to_template(request,
                               template_name,
                               userObj)
+
+@login_required
+def biotemplate(request, username, template_name='recogmatch/biotemplate.html'):
+    
+    return direct_to_template(request,
+                              template_name)

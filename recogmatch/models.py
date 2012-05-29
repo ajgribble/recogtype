@@ -1,9 +1,20 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+cTypeChoices=(
+              ('f', 'fixed'),
+              ('v', 'variable'),
+              )
+
 class Challenge(models.Model):
+    cType = models.CharField(max_length=10, default='f', 
+                             choices=cTypeChoices,
+                             verbose_name='Challenge Type')
     title = models.CharField(max_length=30, verbose_name='Title')
     body = models.TextField(verbose_name='Challenge Request')
+
+    def __unicode__(self):
+        return self.title 
 
 class RawSample(models.Model):
     user = models.ForeignKey(User, verbose_name='Username')
