@@ -7,8 +7,7 @@
     <nav>
         <ul>
             <li><a href="{% url userena_profile_detail user.username %}">Profile</a></li>
-            <li><a href="{% url match_template user.username %}">Biometric Template</a></li>
-            <li><a href="#">Train System</a></li>
+            <li><a href="{% url match_template user.username %}">Train System</a></li>
             <li><a href="#">Challenges</a></li>
             <li><a href="#">Help</a></li>
         </ul>
@@ -18,32 +17,18 @@
 <div class="grid_8 push_1 container">
     <h1>Mandatory Tasks:</h1>
     </br>
-    {% if not name %}
-    <p>Update your account with your first name.</p>
+    {% for key, val in mandatory.items %}
+        <p>Update your profile with your {{ key }}.</p>
+    {% endfor %}
+    {% if bio_template %}
+        <p>Train the system by creating your biometric template.</p>
     {% endif %}
-
-    {% if not dob %}
-    <p>Update your account with your date of birth.</p>
-    {% endif %}
-
-    {% if not sex %}
-    <p>Update your account with your sex.</p>
-    {% endif %}
-
-    {% if not hand %}
-    <p>Update your account with your handedness.</p>
-    {% endif %}
-
-    {% if not use %}
-    <p>Update your account with your average daily computer usage.</p>
-    {% endif %}
-    
     <br /><br />
     <h1>Suggested Tasks:</h1>
     <br />
-    {% if not mug %}
-    <p>Personalize your account with a mugshot</p>
-    {% endif %}
+    {% for key, val in suggested.items %}
+        <p>Update your profile with your {{ key }}.</p>
+    {% endfor %}
 </div> 
 {% endblock recogmatch_content %}
 {% endblock content %}

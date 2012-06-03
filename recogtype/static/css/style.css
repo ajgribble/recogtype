@@ -343,6 +343,15 @@ form #id_mugshot
 {
     color: #00FF00;
 }
+.container blockquote
+{
+    color: #1E90FF;
+    font-style: italic;
+    font-variant: normal;
+    font-weight: lighter;
+    font-size: larger;
+    text-align: justify;
+}
 #content .base_text
 {
     color: #FFF;

@@ -1,8 +1,11 @@
 from django.views.generic.simple import direct_to_template
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 
 from profiles.models import Profile
+from recogmatch.models import Challenge, RawSample, BioTemplate
+from recogmatch.forms import SubmitDataForm
 
 from datetime import date, timedelta
 
@@ -10,37 +13,74 @@ from datetime import date, timedelta
 def dash(request, username, template_name='recogmatch/dashboard.html',
          extra_context=None):
 
-    # Initialize all variables to false as if they haven't been updated
-    userObj = {'name': False, 'mug': False, 'dob': False,
-            'sex': False, 'hand': False, 'use': False}
-
+    # Initialize all variables to decide what to advise to the user
+    mandatory_profile = {}
+    suggested_profile = {}
     user = User.objects.get(username=username)
-    userProfile = Profile.objects.get(user_id=user.id)
+
+    def profile_update(mandatory_profile, suggested_profile, user):
+
+        user_profile = Profile.objects.get(user_id=user.id)
+        
+        if user.first_name == '':
+            mandatory_profile['first name'] = True
+
+        if user_profile.mugshot == '':
+            suggested_profile['mug shot'] = True
+        
+        if user_profile.dob >= date.today()-timedelta(days=6574.32):
+            mandatory_profile['date of birth'] = True
+
+        if user_profile.sex == '':
+            mandatory_profile['sex'] = True
+
+        if user_profile.handed == '':
+            mandatory_profile['handedness'] = True
+
+        if user_profile.daily_usage == '':
+            mandatory_profile['daily computer usage'] = True
+
+        return mandatory_profile, suggested_profile
+
+    def bio_template_update(mandatory_profile, user):
+        
+        for key, val in mandatory_profile.items():
+            if key:
+                return
+        
+        try:
+            user_template = BioTemplate.objects.get(user_id=user.id)
+        except ObjectDoesNotExist:             
+            bio_template = True
+            return bio_template
+
+    (mandatory_profile, suggested_profile) = profile_update(mandatory_profile, 
+                                                    suggested_profile,
+                                                    user)
+    bio_template = bio_template_update(mandatory_profile, user)
     
-    if user.first_name != '':
-        userObj['name'] = True
-
-    if userProfile.mugshot != '':
-        userObj['mug'] = True
-    
-    if userProfile.dob <= date.today()-timedelta(days=6574.32):
-        userObj['dob'] = True
-
-    if userProfile.sex != '':
-        userObj['sex'] = True
-
-    if userProfile.handed != '':
-        userObj['hand'] = True
-
-    if userProfile.daily_usage != '':
-        userObj['use'] = True
-
-    return direct_to_template(request,
-                              template_name,
-                              userObj)
+    return direct_to_template(request, template_name,
+                             {'mandatory': mandatory_profile,
+                              'suggested': suggested_profile,
+                              'bio_template': bio_template})
 
 @login_required
-def biotemplate(request, username, template_name='recogmatch/biotemplate.html'):
+def build_template(request, username, challenge=None,
+                   template_name='recogmatch/biotemplate.html'):
     
-    return direct_to_template(request,
-                              template_name)
+    user = User.objects.get(username=username)
+    challenges = Challenge.objects.all()
+
+    url_chunks = {}
+
+    for item in challenges:
+        url_title = item.title.split(': ')
+        url_title = url_title[1].replace(' ', '-')
+        url_chunks[item.title] = url_title
+     
+        if challenge == url_title: 
+            return direct_to_template(request, template_name,
+                                     {'challenge': item})                                
+
+    return direct_to_template(request, template_name,
+                             {'url_chunks': url_chunks})

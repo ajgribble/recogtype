@@ -4,6 +4,11 @@
 
 {% block recogmatch_content %}
 
-<div>TEST TEST TEST</div>
-
+<div class="grid_8 push_1 container">
+{% for key, val in url_chunks.items %}
+    <p>
+        <a href="{% url match_train user.username val %}">{{ key }}</a>
+    </p>
+{% endfor %}
+</div>
 {% endblock recogmatch_content %}

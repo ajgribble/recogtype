@@ -1,0 +1,23 @@
+{% extends 'recogmatch/dashboard.html' %}
+
+{% block title %}Typing Challenge | RecogType{% endblock title %}
+
+{% block recogmatch_content %}
+<div class="grid_8 push_1 container">
+    
+<h2>{{ challenge.title }}</h2>
+<blockquote>"{{ challenge.body }}"</blockquote>
+
+<hr />
+
+<form id="raw_data_form">
+    {% csrf_token %}
+    <textarea id="raw_data" form="raw_data_form" autofocus="autofocus" 
+        placeholder="Type the Text Above" cols=60 rows=5></textarea>
+    <br />
+    <br />
+    <p><input type="submit" value="Submit" /></p>
+</form>
+
+</div>
+{% endblock recogmatch_content %}
