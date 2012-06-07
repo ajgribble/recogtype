@@ -16,8 +16,49 @@
         placeholder="Type the Text Above" cols=60 rows=5></textarea>
     <br />
     <br />
+    <label id="message"></label>
     <p><input type="submit" value="Submit" /></p>
 </form>
 
 </div>
+<script src="http://api.jquery.com/scripts/events.js"></script>
+<script>
+    var data = []
+    
+    function keyObj(down, press, up, val) {
+        this.down = down;
+        this.press = press;
+        this.up = up;
+        this.val = val;
+    }
+    $('#raw_data').keydown(function(event) {
+        if (event.which != 16 && event.which != 17 && event.which != 18) {
+            down = event.timeStamp;
+        }
+    });
+    $('#raw_data').keypress(function(event) { 
+        if (event.which != 16 && event.which != 17 && event.which != 18) {
+            val = String.fromCharCode(event.which);
+            press = event.timeStamp;
+        }
+    });
+    $('#raw_data').keyup(function(event) {
+        if (event.which != 16 && event.which != 17 && event.which != 18) {
+            up = event.timeStamp;
+            data.push(new keyObj(down,press,up,val));
+        }
+    });
+    $('#raw_data_form').submit(function() {
+        raw_data = {}
+        raw_data.data = JSON.stringify(data);
+        $.post("{% url match_submit user.username url_title %}",
+               raw_data,
+               function(responseData) {
+                   $('#message').html(responseData);
+               }
+        ); 
+
+        return false;
+    });
+</script>
 {% endblock recogmatch_content %}

@@ -2,6 +2,8 @@ from django.views.generic.simple import direct_to_template
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 from profiles.models import Profile
 from recogmatch.models import Challenge, RawSample, BioTemplate
@@ -65,8 +67,8 @@ def dash(request, username, template_name='recogmatch/dashboard.html',
                               'bio_template': bio_template})
 
 @login_required
-def build_template(request, username, challenge=None,
-                   template_name='recogmatch/biotemplate.html'):
+def challenge(request, username, challenge=None,
+              template_name='recogmatch/biotemplate.html'):
     
     user = User.objects.get(username=username)
     challenges = Challenge.objects.all()
@@ -76,11 +78,18 @@ def build_template(request, username, challenge=None,
     for item in challenges:
         url_title = item.title.split(': ')
         url_title = url_title[1].replace(' ', '-')
-        url_chunks[item.title] = url_title
      
         if challenge == url_title: 
             return direct_to_template(request, template_name,
-                                     {'challenge': item})                                
+                                     {'challenge': item,
+                                      'url_title': url_title})                                
 
     return direct_to_template(request, template_name,
                              {'url_chunks': url_chunks})
+@login_required
+@csrf_exempt
+def submit_raw_data(request, username, challenge):
+    raw_data = request.POST['data']
+
+    return HttpResponse(raw_data)
+    
