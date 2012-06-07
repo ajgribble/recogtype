@@ -28,7 +28,6 @@ def signup(request):
             if pform.is_valid():
                 profile = pform.save(commit=False)
                 profile.user = user
-                import pdb; pdb.set_trace()
                 profile = pform.save()
 
             redirect_to = reverse('userena_signup_complete',

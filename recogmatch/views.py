@@ -78,6 +78,7 @@ def challenge(request, username, challenge=None,
     for item in challenges:
         url_title = item.title.split(': ')
         url_title = url_title[1].replace(' ', '-')
+        url_chunks[item.title] = url_title
      
         if challenge == url_title: 
             return direct_to_template(request, template_name,
@@ -88,8 +89,16 @@ def challenge(request, username, challenge=None,
                              {'url_chunks': url_chunks})
 @login_required
 @csrf_exempt
-def submit_raw_data(request, username, challenge):
+def submit_raw_data(request, username, challenge_id):
     raw_data = request.POST['data']
+    user = User.objects.get(username=username)
+    challenge = Challenge.objects.get(id=challenge_id)
+
+    sample = RawSample()
+    sample.user = user
+    sample.data = raw_data
+    sample.challenge_id=challenge
+    sample.save()
 
     return HttpResponse(raw_data)
     

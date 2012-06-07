@@ -51,7 +51,7 @@
     $('#raw_data_form').submit(function() {
         raw_data = {}
         raw_data.data = JSON.stringify(data);
-        $.post("{% url match_submit user.username url_title %}",
+        $.post("{% url match_submit user.username challenge.id %}",
                raw_data,
                function(responseData) {
                    $('#message').html(responseData);

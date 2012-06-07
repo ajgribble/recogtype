@@ -121,6 +121,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     # Uncomment the next line for simple clickjacking protection:
@@ -145,6 +146,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'django.contrib.flatpages',
 
     # Third Party Apps
     'userena',

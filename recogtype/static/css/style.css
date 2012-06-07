@@ -334,7 +334,6 @@ form #id_mugshot
 {
     border-radius: 20px;
     border: 1px solid #FFF;
-    text-align: center;
     color: #00FF00;
     padding: 20px;
     min-height: 400px;
@@ -342,6 +341,43 @@ form #id_mugshot
 .container h1, h2, h3, h4, h5, h6, p
 {
     color: #00FF00;
+}
+.container h1
+{
+    font-size: 36px;
+}
+.container h2
+{
+    font-size: 24px;
+}
+.container h3
+{
+    font-size: 20px;
+}
+.container h4
+{
+    font-size: 18px;
+}
+.container h5
+{
+    font-size: 12px;
+}
+.container h6
+{
+    font-size: 8px;
+}
+.container p
+{
+    font-size: 14px;
+}
+.container li
+{
+    margin-left: 40px;
+    font-size: 12px;
+}
+p > blockquote
+{
+    font-size: 12px;
 }
 .container blockquote
 {
