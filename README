@@ -1,0 +1,20 @@
+RecogType is a Django backed web app used to collect and process keystrokes
+as a way to identify a user as either as genuine or impostor.
+
+Details
+-------
+
+Author: Adam Gribble
+Version: 0.7.1
+
+Dependencies
+------------
+
+    * Django==1.4
+    * Python==2.7
+    * South==0.7.4
+    * django-guardian==1.0.4
+    * django-userena==1.0.2
+    * easy-thumbnails==1.0-alpha-21
+    * psycopg2==2.4.5
+    * wsgiref==0.1.2
