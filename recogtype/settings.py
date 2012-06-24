@@ -154,6 +154,7 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'south',
     'debug_toolbar',
+    'django_countries',
 
     # Project Specific Apps
     'profiles',

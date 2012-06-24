@@ -4,18 +4,22 @@
 
 {% block profile_content %}
 
-<div class="grid_4 push_2">
+<div class="grid_8 push_1">
 <form action="" enctype="multipart/form-data" method="post">
     {% csrf_token %}
     <fieldset>
     <legend class="base_text">Edit Profile</legend>
     {% for field in form %}
         <div class="form_row base_text">
-            <div class="label"><label for="{{ field.name }}">{{ field.label }}:</label></div>
-            {{ field }}
+            <div class="label">
+                <label for="{{ field.name }}">{{ field.label }}:</label>
+            </div>
+            <div class="input">
+                {{ field }}
+            </div>
         </div>
     {% endfor %}
-        <div class="submit">
+        <div class="submit form_row">
             <input type="submit" value="Save Changes" />
         </div>
     </fieldset>
