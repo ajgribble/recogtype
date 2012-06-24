@@ -45,6 +45,12 @@ def dash(request, username, template_name='recogmatch/dashboard.html',
         if user_profile.daily_usage == '':
             mandatory_profile['daily computer usage'] = True
 
+        if user_profile.country == '':
+            mandatory_profile['country'] = True
+        
+        if user_profile.language == None:
+            mandatory_profile['first language'] = True
+
         return mandatory_profile, suggested_profile
 
     def bio_template_update(mandatory_profile, user):

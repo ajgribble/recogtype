@@ -40,6 +40,16 @@
             {% if profile.daily_usage %}
             <p><strong>Daily Computer Usage</strong><br /> 
                 {{ profile.daily_usage }} hours a day
+            </p><br />
+            {% endif %}
+            {% if profile.country %}
+            <p><strong>Country of Origin</strong><br /> 
+                {{ profile.country }}
+            </p><br />
+            {% endif %}
+            {% if profile.language %}
+            <p><strong>Primary Spoken Language</strong><br /> 
+                {{ profile.language }}
             </p>
             {% endif %}
         </div>
