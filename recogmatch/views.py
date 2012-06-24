@@ -29,8 +29,11 @@ def dash(request, username, template_name='recogmatch/dashboard.html',
 
         if user_profile.mugshot == '':
             suggested_profile['mug shot'] = True
-        
-        if user_profile.dob >= date.today()-timedelta(days=6574.32):
+       
+        if user_profile.dob:
+            if user_profile.dob >= date.today()-timedelta(days=6574.32):
+                mandatory_profile['date of birth'] = True
+        else:
             mandatory_profile['date of birth'] = True
 
         if user_profile.sex == '':

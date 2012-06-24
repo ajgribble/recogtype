@@ -25,7 +25,8 @@ HOUR_CHOICES = (
 class Profile(UserenaBaseProfile):
     user = models.OneToOneField(User, unique=True, verbose_name='Username', 
 		    		related_name='profile')
-    dob = models.DateField(default=datetime.date.today, blank=True)
+    dob = models.DateField(verbose_name='Date of Birth', blank=True, 
+                           null=True)
     sex = models.CharField(verbose_name='Sex', max_length=1, blank=True,
                            choices=GENDER_CHOICES)
     handed = models.CharField(verbose_name='Handedness', max_length=1, 
