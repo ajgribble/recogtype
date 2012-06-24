@@ -15,7 +15,7 @@
 </div>
 {% block recogmatch_content %}
 <div class="grid_8 push_1 container">
-    <h1>Mandatory Tasks:</h1>
+    <h3>Mandatory Tasks:</h3>
     </br>
     {% for key, val in mandatory.items %}
         <p>Update your profile with your {{ key }}.</p>
@@ -24,7 +24,7 @@
         <p>Train the system by creating your biometric template.</p>
     {% endif %}
     <br /><br />
-    <h1>Suggested Tasks:</h1>
+    <h3>Suggested Tasks:</h3>
     <br />
     {% for key, val in suggested.items %}
         <p>Update your profile with your {{ key }}.</p>
