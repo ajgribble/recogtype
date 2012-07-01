@@ -25,11 +25,14 @@
 <script>
     var data = []
     
-    function keyObj(down, press, up, val) {
+    function keyObj(val_press, press_code, val_up, up_code, down, press, up) {
         this.down = down;
         this.press = press;
         this.up = up;
-        this.val = val;
+        this.val_press = val_press;
+        this.press_code = press_code;
+        this.val_up = val_up
+        this.up_code = up_code
     }
     $('#raw_data').keydown(function(event) {
         if (event.which != 16 && event.which != 17 && event.which != 18) {
@@ -38,14 +41,17 @@
     });
     $('#raw_data').keypress(function(event) { 
         if (event.which != 16 && event.which != 17 && event.which != 18) {
-            val = String.fromCharCode(event.which);
+            val_press = String.fromCharCode(event.which);
+            press_code = event.which;
             press = event.timeStamp;
         }
     });
     $('#raw_data').keyup(function(event) {
         if (event.which != 16 && event.which != 17 && event.which != 18) {
             up = event.timeStamp;
-            data.push(new keyObj(down,press,up,val));
+            val_up = String.fromCharCode(event.which);
+            up_code = event.which;
+            data.push(new keyObj(val_press, press_code, val_up, up_code, down,press,up));
         }
     });
     $('#raw_data_form').submit(function() {
