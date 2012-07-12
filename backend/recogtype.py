@@ -29,7 +29,7 @@ class RecogDataSample():
 
         # Connect to the database
         try:
-            conn = psycopg2.connect("test connection data")
+            conn = psycopg2.connect("db info")
         except:
             print "Cannot connect to the database"
         
@@ -85,30 +85,30 @@ class RecogDataSample():
                                          'most common words')
 
             # The most common first letter in a word in order of frequency
-            first_letters = ['T','O','A','W','B','C','D','S','F', 
-                             'M','R','H','I','Y','E','G','L','N', 
-                             'O','U','J','K']
+            first_letters = ['t','o','a','w','b','c','d','s','f', 
+                             'm','r','h','i','y','e','g','l','n', 
+                             'o','u','j','k']
 
             # The most common second letter in a word in order of frequency
-            second_letters = ['H','O','E','I','A','U','N','R','T']
+            second_letters = ['h','o','e','i','a','u','n','r','t']
 
             # The most common third letter in a word in order of frequency
-            third_letters = ['E','S','A','R','N','I']
+            third_letters = ['e','s','a','r','n','i']
 
             # More than half of all words end with
-            ending_letters = ['E','T','D','S']
+            ending_letters = ['e','t','d','s']
 
             # Most common digraphs on order of frequency
-            common_digraphs = ['TH','HE','AN','IN','ER','ON','RE','ED','ND', 
-                               'HA','AT','EN','ES','OF','NT','EA','TI','TO', 
-                               'IO','LE','IS','OU','AR','AS','DE','RT','VE']
+            common_digraphs = ['th','he','an','in','er','on','re','ed','nd', 
+                               'ha','at','en','es','of','nt','ea','ti','to', 
+                               'io','le','is','ou','ar','as','de','rt','ve']
             
             # The most common trigraphs in order of frequency
-            common_trigraphs = ['THE','AND','THA','ENT','ION','TIO','FOR','NDE', 
-                                'HAS','NCE','TIS','OFT','MEN']
+            common_trigraphs = ['the','and','tha','ent','ion','tio','for','nde', 
+                                'has','nce','tis','oft','men']
 
             # The most common double letters in order of frequency
-            common_doubles = ['SS','EE','TT','FF','LL','MM','OO']
+            common_doubles = ['ss','ee','tt','ff','ll','mm','oo']
 
             # The most common two-letter words in order of frequency
             common_2l_words = ['of','to','in','it','is','be','as','at','so', 
@@ -124,7 +124,7 @@ class RecogDataSample():
                                'say','she','too','use'] 
 
             # The most common four-letter words in order of frequency
-            common_4l_words = ['That','with','have','this','will','your', 
+            common_4l_words = ['that','with','have','this','will','your', 
                                'from','they','know','want','been','good', 
                                'much','some','time','very','when','come', 
                                'here','just','like','long','make','many', 
@@ -133,7 +133,7 @@ class RecogDataSample():
     
             # The most commonly used words in the English language 
             # in order of frequency
-            most_common_words =['The','of','and','to','in','a','is','that',
+            most_common_words =['the','of','and','to','in','a','is','that',
                                 'be','it','by','are','for','was','as','he',
                                 'with','on','his','at','which','but','from',
                                 'has','this','will','one','have','not','were',
@@ -153,7 +153,7 @@ class RecogDataSample():
                                 'our','take','upon','what'] 
 
             # If user has not provided an external list of character groupings
-            if not external_ks_list and not selective_ks_list:
+            if not external_ks_dict and not selective_ks_list:
                 self.keystroke_dict = {'first letters': first_letters,
                                        'second letters': second_letters,
                                        'third letters': third_letters,
@@ -175,14 +175,13 @@ class RecogDataSample():
                         if i == j:
                             dict_val = j.replace(' ', '_')
                             self.keystroke_dict[j] = eval(dict_val)
-                            
             else:
                 print "Your request was not viable"
 
 
     # Extracts requested features from: dwell, latency, interval, 
     # flight and up2up
-    def pull_features(self, raw_data, feature_list):
+    def pull_features(self, feature_list):
         # Set feature definition dictionary
         feature_dict = {'dwell': "key1['up'] - key1['down']",
                         'interval': "key2['up'] - key1['down']",
@@ -197,54 +196,65 @@ class RecogDataSample():
         else:
             self.feature_types = feature_list
 
-        self.feature_vals = np.zeros((len(raw_data)-1, len(self.feature_types)))
-        self.feature_digraphs = np.empty([len(raw_data)-1], dtype='a2')
+        temp_feature_vals = []
+        temp_feature_digraphs = []
+        
         # Pull requested features from each digraph or individual keystroke
-        for index, keystroke in enumerate(raw_data):
-            if index != len(raw_data)-1:
+        for index, keystroke in enumerate(self.raw_data):
+            if index != len(self.raw_data)-1:
                 # Get first and second keys pressed in digraph
                 key1 = keystroke
-                key2 = raw_data[index + 1]
+                key2 = self.raw_data[index + 1]
             
-                # Pulls different timings as features
-                self.feature_digraphs[index] = key1['val_up'] + key2['val_up']
-                
-                for i, val in enumerate(self.feature_types):
-                    feature = eval(feature_dict[val])
-                    if feature < 1000: # Use to remove outliers if needed
-                        self.feature_vals[index, i] = feature
+                # Pulls the digraph being examined
+                digraph = key1['val_up'] + key2['val_up']
+
+                # Only pulls features out of the digraph if it is 
+                # recognized in the keystroke dictionary
+                for key, val in self.keystroke_dict.items():
+                    if digraph.lower() in val:
+                        temp_row = []
+                        temp_feature_digraphs.append(digraph)
+                        for i, val in enumerate(self.feature_types):
+                            feature = eval(feature_dict[val])
+                            temp_row.append(feature)
+                        temp_feature_vals.append(temp_row)
+
+        self.feature_vals = np.array(temp_feature_vals) 
+        self.feature_digraphs = np.asarray(temp_feature_digraphs)
 
 class RecogDataModel():
     def __init__(self):
         self.observed_samples = np.array([])
         self.observed_digraphs = np.array([])
     
-    def train_model(self, observed_samples, observed_digraphs):
+    def train_model(self, observed_samples, observed_digraphs): 
         # Creates numerical label for each observed keystroke
         def create_targets(ods):
             target_array = np.zeros((len(ods.ravel())), dtype='int64') #np.zeros(np.shape(ods.ravel()))
-            print np.shape(target_array)
             counter = 0
-            for i, val in enumerate(ods):
-                target = np.in1d(self.observed_digraphs, val)
-                for j, val in enumerate(target):
-                    if val:
-                        target_array[counter] = j
-                        counter += 1
-                        break
+            for i, val1 in enumerate(ods):
+                target = np.in1d(self.observed_digraphs, val1)
+                for j, val2 in enumerate(target):
+                    if val2:
+                        target_array[i] = j
             return target_array
 
 
         # Creates or appends digraphs observed for labeling purposes
         def update_observed_digraphs(ods):
             if np.shape(self.observed_digraphs) == (0,):
-                self.observed_digraphs = ods
+                temp_list = []
+                for i, val in enumerate(ods):
+                    if val not in temp_list:
+                        temp_list.append(val)
+                self.observed_digraphs = np.asarray(temp_list)
             else:
                 temp = np.in1d(ods, self.observed_digraphs)
                 for i, val in enumerate(temp):
-                    print val
                     if not val:
-                        self.observed_digraphs = np.append(self.observed_digraphs, ods[i]) 
+                        self.observed_digraphs = np.append(self.observed_digraphs, 
+                                                           ods[i]) 
 
         def make_ellipses(gmm, ax):
             n = 0
@@ -281,10 +291,20 @@ class RecogDataModel():
                                left=.01, right=.99)
 
             for index, (name, classifier) in enumerate(classifiers.iteritems()):
-                print np.shape(np.array([X_train[Y_train == i].mean(axis=0)
-                                for i in xrange(n_classes)]))
-                classifier.means_ = np.array([X_train[Y_train == i].mean(axis=0)
-                                              for i in xrange(n_classes)])
+                temp_means = []
+                for i in xrange(n_classes):
+                    temp_mean = X_train[Y_train == i].mean(axis=0)
+                    if np.isnan(temp_mean).any():
+                        #print X_train[Y_train == i]
+                        #print Y_train
+                        #print i
+                        #raw_input()
+                        pass
+                    else:
+                        temp_means.append(temp_mean.round(decimals=3))
+                classifier.means_ = np.array(temp_means)
+                print np.shape(classifier.means_)
+                
                 # Train the parameters using the EM algorithm.
                 classifier.fit(X_train)
                 #print classifier.covars_          
