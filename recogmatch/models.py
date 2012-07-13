@@ -1,16 +1,26 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-cTypeChoices=(
-              ('f', 'fixed'),
-              ('v', 'variable'),
-              )
+ChallengeTypeChoices=(
+                        ('f', 'fixed'),
+                        ('v', 'variable'),
+                     )
+
+ChallengeUseChoices=(
+                        ('t', 'train'),
+                        ('c', 'challenge'),
+                    )
 
 class Challenge(models.Model):
-    cType = models.CharField(max_length=10, default='f', 
-                             choices=cTypeChoices,
-                             verbose_name='Challenge Type')
-    title = models.CharField(max_length=30, verbose_name='Title')
+    title = models.CharField(max_length=50, verbose_name='Title')
+    challenge_type = models.CharField(max_length=10, default='f', 
+                                      choices=ChallengeTypeChoices,
+                                      verbose_name='Challenge Type')
+    challenge_use = models.CharField(max_length=10, default='t',
+                                     choices=ChallengeUseChoices,
+                                     verbose_name='Challenge Use')
+    challenge_focus = models.CharField(max_length=300,
+                                       verbose_name='Challenge Focus')
     body = models.TextField(verbose_name='Challenge Request')
 
     def __unicode__(self):

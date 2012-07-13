@@ -6,8 +6,7 @@
 <div class="grid_8 push_1 container">
     
 <h2>{{ challenge.title }}</h2>
-<blockquote>"{{ challenge.body }}"</blockquote>
-
+{{ challenge.body|safe }}
 <hr />
 
 <form id="raw_data_form">
@@ -60,7 +59,7 @@
         $.post("{% url match_submit user.username challenge.id %}",
                raw_data,
                function(responseData) {
-                   $('#message').html(responseData);
+                   $('#message').html("Sent!");
                }
         ); 
 
