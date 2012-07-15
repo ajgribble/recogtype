@@ -124,12 +124,12 @@ class CharacterChainCounter():
         # Check if the word contains the digraph
         for j, ue in enumerate(word):
             try:
-                digraph = word[j]+ word[j+1]
+                digraph = ue + word[j+1]
             except:
                 continue
             if digraph.lower() in common_digraphs:
                 self.chain_count['digraph'] += 1
-                if j not in self.encountered['digraph']:
+                if digraph not in self.encountered['digraph']:
                     self.encountered['digraph'][digraph] = 1
                 else:
                     self.encountered['digraph'][digraph] += 1
@@ -142,15 +142,15 @@ class CharacterChainCounter():
         # Check if the word contains the trigraph
         for j, ue in enumerate(word):
             try:
-                trigraph = word[j] + word[j+1] + word[j+2]
+                trigraph = ue + word[j+1] + word[j+2]
             except:
                 continue
             if trigraph.lower() in common_trigraphs:
                 self.chain_count['trigraph'] += 1
-                if j not in self.encountered['trigraph']:
+                if trigraph not in self.encountered['trigraph']:
                     self.encountered['trigraph'][trigraph] = 1
                 else:
-                    self.encountered['digraph'][trigraph] += 1
+                    self.encountered['trigraph'][trigraph] += 1
 
     def check_doubles(self, word):
         # The most common double letters in order of frequency
@@ -160,12 +160,12 @@ class CharacterChainCounter():
         for i, val in enumerate(common_doubles):
             for j, ue in enumerate(word):
                 try:
-                    double = word[j]+ word[j+1]
+                    double = ue + word[j+1]
                 except:
                     continue
                 if val == double:
                     self.chain_count['double'] += 1
-                    if i not in self.encountered['double']:
+                    if double not in self.encountered['double']:
                         self.encountered['double'][double] = 1
                     else:
                         self.encountered['double'][double] += 1
