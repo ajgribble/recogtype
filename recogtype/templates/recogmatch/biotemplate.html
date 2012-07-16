@@ -1,10 +1,10 @@
 {% extends 'recogmatch/dashboard.html' %}
 
-{% block title %}Biometric Template | RecogType{% endblock title %}
+{% block title %}Biometric Template{% endblock title %}
 
 {% block recogmatch_content %}
 
-<div class="grid_8 push_1 container">
+<div class="grid_8 push_1">
 {% for key, val in url_chunks.items %}
     <p>
         <a href="{% url match_train user.username val %}">{{ key }}</a>

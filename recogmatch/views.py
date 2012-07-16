@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.template.defaultfilters import slugify
 
 from profiles.models import Profile
 from recogmatch.models import Challenge, RawSample, BioTemplate
@@ -85,14 +86,15 @@ def challenge(request, username, challenge=None,
     url_chunks = {}
 
     for item in challenges:
-        url_title = item.title.split(': ')
-        url_title = url_title[1].replace(' ', '-')
+        url_title = slugify(item)
         url_chunks[item.title] = url_title
+        template_path = 'recogmatch/challenges/' + url_title + '.html'
      
         if challenge == url_title: 
             return direct_to_template(request, template_name,
                                      {'challenge': item,
-                                      'url_title': url_title})                                
+                                      'url_title': url_title,
+                                      'template_path': template_path})                                
 
     return direct_to_template(request, template_name,
                              {'url_chunks': url_chunks})

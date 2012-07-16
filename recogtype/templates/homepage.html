@@ -2,35 +2,35 @@
 {% block title %}Welcome | RecogType{% endblock title %}
 
 {% block content %}
-<div class="grid_8 push_3 container">
-    <h2>Welcome to RecogType!</h2><br /><br />
-    {% if user.username != '' %}
-    <p>
-    Since you're already logged in why not try some new challenges from
-    your <a href="/dashboard/{{ user.username }}">Dashboard</a>?</p><br /> 
-    {% endif %}
 
-    <h3>What is RecogType?</h3>
-    <p>The short anwer is RecogType is a data collection and recognition 
-    system created to support my MSc thesis at the University of Kent. The 
-    theme of my thesis is "Keystroke Dynamics as a Biometric" which basically
-    means "recognizing a user by how they type".</p><br /><br />
+<h2>Welcome to RecogType!</h2><br /><br />
+{% if user.username %}
+<p>
+Since you're already logged in why not try some new challenges from
+your <a href="/dashboard/{{ user.username }}">Dashboard</a>?</p><br /> 
+{% endif %}
 
-    <h3>Who Can Use RecogType?</h3>
-    <p>As long as you are 18 or older you can use RecogType! No matter your
-    typing style or skill you are welcome to join in the study.</p><br /><br />
+<h3>What is RecogType?</h3>
+<p>The short anwer is RecogType is a data collection and recognition 
+system created to support my MSc thesis at the University of Kent. The 
+theme of my thesis is "Keystroke Dynamics as a Biometric" which basically
+means "recognizing a user by how they type".</p><br /><br />
 
-    <h3>Where Can I Learn More?</h3>
-    <p>Within the navigation bar at the top you can find a link to the FAQs
-    page which will delve deeper into the project and give you, the user, the
-    ability to email me with other questions you may have. This project also 
-    aims to enlighten the user community on the technologies it is built-on 
-    so the more questions the better!</p></br /><br />
+<h3>Who Can Use RecogType?</h3>
+<p>As long as you are 18 or older you can use RecogType! No matter your
+typing style or skill you are welcome to join in the study.</p><br /><br />
 
-    <h3>I'm Ready to Join! So...How?</h3>
-    <p>Within the navigation bar at the top is the registration link. Simply
-    follow it to the registration page and you'll be on your way to 
-    understanding a technology that may prove to revolutionize the way your 
-    computer is protected from unauthorized users!</p>
-</div>
+<h3>Where Can I Learn More?</h3>
+<p>Within the navigation bar at the top you can find a link to the FAQs
+page which will delve deeper into the project and give you, the user, the
+ability to email me with other questions you may have. This project also 
+aims to enlighten the user community on the technologies it is built-on 
+so the more questions the better!</p></br /><br />
+
+<h3>I'm Ready to Join! So...How?</h3>
+<p>Within the navigation bar at the top is the registration link. Simply
+follow it to the registration page and you'll be on your way to 
+understanding a technology that may prove to revolutionize the way your 
+computer is protected from unauthorized users!</p>
+
 {% endblock content %}

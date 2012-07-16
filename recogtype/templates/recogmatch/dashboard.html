@@ -1,20 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}Dashboard | RecogType{% endblock title %}
+{% block title %}Dashboard{% endblock title %}
 
 {% block content %}
-<div id="local_nav" class="grid_2">
-    <nav>
-        <ul>
-            <li><a href="{% url userena_profile_detail user.username %}">Profile</a></li>
-            <li><a href="{% url match_template user.username %}">Train System</a></li>
-            <li><a href="#">Challenges</a></li>
-            <li><a href="#">Help</a></li>
-        </ul>
-    </nav>
-</div>
 {% block recogmatch_content %}
-<div class="grid_8 push_1 container">
+<div class="grid_8 push_1">
     <h3>Mandatory Tasks:</h3>
     </br>
     {% for key, val in mandatory.items %}

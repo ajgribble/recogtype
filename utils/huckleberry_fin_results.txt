@@ -1,0 +1,137 @@
+Trigraph Letter Count: 24 out of possible 211
+Last Letter Count: 56 out of possible 115
+Third Letter Count: 37 out of possible 92
+Digraph Letter Count: 125 out of possible 321
+Double Letter Count: 12 out of possible 13
+L4 Letter Count: 7 out of possible 21
+Ln Letter Count: 51 out of possible 115
+Second Letter Count: 98 out of possible 110
+L2 Letter Count: 18 out of possible 18
+L3 Letter Count: 32 out of possible 37
+First Letter Count: 112 out of possible 115
+
+------------------------------
+
+Trigraph Character Chain: and encountered 7 times.
+Trigraph Character Chain: for encountered 2 times.
+Trigraph Character Chain: men encountered 1 times.
+Trigraph Character Chain: nce encountered 1 times.
+Trigraph Character Chain: The encountered 2 times.
+Trigraph Character Chain: the encountered 11 times.
+Last Character Chain: s encountered 3 times.
+Last Character Chain: e encountered 21 times.
+Last Character Chain: d encountered 16 times.
+Last Character Chain: t encountered 16 times.
+Third Character Chain: a encountered 6 times.
+Third Character Chain: e encountered 21 times.
+Third Character Chain: i encountered 3 times.
+Third Character Chain: n encountered 1 times.
+Third Character Chain: s encountered 1 times.
+Third Character Chain: r encountered 5 times.
+Digraph Character Chain: en encountered 3 times.
+Digraph Character Chain: ve encountered 3 times.
+Digraph Character Chain: ed encountered 5 times.
+Digraph Character Chain: ea encountered 6 times.
+Digraph Character Chain: an encountered 9 times.
+Digraph Character Chain: ar encountered 2 times.
+Digraph Character Chain: at encountered 4 times.
+Digraph Character Chain: Th encountered 2 times.
+Digraph Character Chain: in encountered 7 times.
+Digraph Character Chain: es encountered 2 times.
+Digraph Character Chain: er encountered 8 times.
+Digraph Character Chain: le encountered 5 times.
+Digraph Character Chain: to encountered 7 times.
+Digraph Character Chain: nd encountered 7 times.
+Digraph Character Chain: re encountered 2 times.
+Digraph Character Chain: th encountered 16 times.
+Digraph Character Chain: ti encountered 2 times.
+Digraph Character Chain: nt encountered 4 times.
+Digraph Character Chain: ha encountered 3 times.
+Digraph Character Chain: he encountered 20 times.
+Digraph Character Chain: of encountered 1 times.
+Digraph Character Chain: ou encountered 7 times.
+Double Character Chain: oo encountered 2 times.
+Double Character Chain: ee encountered 1 times.
+Double Character Chain: ll encountered 6 times.
+Double Character Chain: tt encountered 2 times.
+Double Character Chain: mm encountered 1 times.
+L4 Character Chain: with encountered 1 times.
+L4 Character Chain: over encountered 2 times.
+L4 Character Chain: come encountered 1 times.
+L4 Character Chain: them encountered 2 times.
+L4 Character Chain: time encountered 1 times.
+Ln Character Chain: and encountered 7 times.
+Ln Character Chain: all encountered 1 times.
+Ln Character Chain: over encountered 2 times.
+Ln Character Chain: it encountered 1 times.
+Ln Character Chain: in encountered 1 times.
+Ln Character Chain: her encountered 1 times.
+Ln Character Chain: no encountered 1 times.
+Ln Character Chain: there encountered 1 times.
+Ln Character Chain: had encountered 2 times.
+Ln Character Chain: to encountered 6 times.
+Ln Character Chain: other encountered 1 times.
+Ln Character Chain: new encountered 1 times.
+Ln Character Chain: you encountered 4 times.
+Ln Character Chain: them encountered 2 times.
+Ln Character Chain: I encountered 1 times.
+Ln Character Chain: but encountered 3 times.
+Ln Character Chain: with encountered 1 times.
+Ln Character Chain: by encountered 1 times.
+Ln Character Chain: a encountered 4 times.
+Ln Character Chain: for encountered 2 times.
+Ln Character Chain: of encountered 1 times.
+Ln Character Chain: up encountered 1 times.
+Ln Character Chain: time encountered 1 times.
+Ln Character Chain: the encountered 5 times.
+Second Character Chain: a encountered 12 times.
+Second Character Chain: e encountered 13 times.
+Second Character Chain: i encountered 8 times.
+Second Character Chain: h encountered 18 times.
+Second Character Chain: o encountered 26 times.
+Second Character Chain: n encountered 9 times.
+Second Character Chain: r encountered 3 times.
+Second Character Chain: u encountered 7 times.
+Second Character Chain: t encountered 2 times.
+L2 Character Chain: me encountered 4 times.
+L2 Character Chain: do encountered 1 times.
+L2 Character Chain: no encountered 1 times.
+L2 Character Chain: of encountered 1 times.
+L2 Character Chain: it encountered 1 times.
+L2 Character Chain: up encountered 1 times.
+L2 Character Chain: to encountered 6 times.
+L2 Character Chain: in encountered 1 times.
+L2 Character Chain: go encountered 1 times.
+L2 Character Chain: by encountered 1 times.
+L3 Character Chain: and encountered 7 times.
+L3 Character Chain: all encountered 1 times.
+L3 Character Chain: old encountered 1 times.
+L3 Character Chain: her encountered 1 times.
+L3 Character Chain: for encountered 2 times.
+L3 Character Chain: had encountered 2 times.
+L3 Character Chain: but encountered 3 times.
+L3 Character Chain: she encountered 3 times.
+L3 Character Chain: put encountered 1 times.
+L3 Character Chain: new encountered 1 times.
+L3 Character Chain: the encountered 5 times.
+L3 Character Chain: you encountered 4 times.
+L3 Character Chain: too encountered 1 times.
+First Character Chain: a encountered 15 times.
+First Character Chain: c encountered 9 times.
+First Character Chain: b encountered 5 times.
+First Character Chain: e encountered 1 times.
+First Character Chain: d encountered 2 times.
+First Character Chain: g encountered 3 times.
+First Character Chain: f encountered 3 times.
+First Character Chain: i encountered 3 times.
+First Character Chain: h encountered 5 times.
+First Character Chain: m encountered 6 times.
+First Character Chain: l encountered 4 times.
+First Character Chain: o encountered 5 times.
+First Character Chain: n encountered 5 times.
+First Character Chain: s encountered 7 times.
+First Character Chain: r encountered 3 times.
+First Character Chain: u encountered 1 times.
+First Character Chain: t encountered 23 times.
+First Character Chain: w encountered 8 times.
+First Character Chain: y encountered 4 times.

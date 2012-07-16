@@ -3,17 +3,6 @@
 {% block title %}{% endblock %}
 
 {% block content %} 
-<div id="local_nav" class="grid_2">
-    <nav>
-        <ul>
-            <li><a href="{% url match_dash user.username %}">Dashboard</a></li>
-            <li><a href="{% url userena_profile_detail user.username %}">View Profile</a></li>
-            <li><a href="{% url userena_profile_edit user.username %}">Edit Details</a></li>
-            <li><a href="{% url userena_password_change user.username %}">Change Password</a></li>
-            <li><a href="{% url userena_email_change user.username %}">Change Email</a></li>
-        </ul>
-    </nav>
-</div>
 
 {% block profile_content %}
 {% endblock profile_content %}

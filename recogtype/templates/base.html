@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>{% block title %}{% endblock title %}</title>
+	<title>{% block title %}{% endblock title %} | RecogType</title>
     {% block styles %}
     <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/reset.css" />
     <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/960.css" />
@@ -12,11 +12,11 @@
 </head>
 <body>
 <div id="header" class="container_12">
-    <div id="icon" class="grid_2">
+    <div id="icon" class="grid_3">
         <a href="/">RecogType</a>
         <em class="base_text">Security at your fingertips</em>
     </div>
-    <div id="nav" class="grid_10">
+    <div id="nav" class="grid_9">
         <div id="links" class="base_text horizontal">
             <ul>
                 <li><a href="/">Home</a></li>
@@ -43,20 +43,76 @@
 </div><!-- end header -->
 
 <div id="content" class="container_12">
+{% if user.username %}
+<div id="local_nav" class="grid_3">
+    <ul class="menu">
+        <li class="item1"><a href="#">Dashboard<span>11</span></a>
+            <ul>
+                <li class="subitem1">
+                <a href="{% url match_dash user.username %}">Dashboard Home <span>5</span></a></li>
+                <li class="subitem2">
+                <a href="{% url match_template user.username %}">Train System <span>4</span></a></li>
+                <li class="subitem3">
+                <a href="#">Challenge System <span>2</span></a></li>
+            </ul>
+        </li>
+        <li class="item2"><a href="#">Profile</a>
+            <ul>
+                <li class="subitem1">
+                <a href="{% url userena_profile_detail user.username %}">Profile Home</a></li>
+                <li class="subitem2">
+                <a href="{% url userena_profile_edit user.username %}">Edit Details</a></li>
+                <li class="subitem3">
+                <a href="{% url userena_password_change user.username %}">Change Password</a></li>
+                <li class="subitem4">
+                <a href="{% url userena_email_change user.username %}">Change Email</a></li>
+            </ul>
+        </li>
+        <li class="item3"><a href="#">Help</a>
+            <ul>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div class="grid_9 push_3 container">
+{% else %}
+<div class="grid_9 push_3">
+{% endif %}
     {% block content %}{% endblock content %}
 </div>
-
-<div id="footer" class="container_12">
-    <div id="nav" class="grid_10 push_2">
-        <div class="base_text horizontal">
-            <ul>
-                <li><a href="/disclaimer/">Disclaimer</a></li>
-                <li><a href="/copyright/">Copyright</a></li>
-                <li><a href="/privacy/">Privacy Policy</a></li>
-            </ul>
-        </div>
-    </div>
 </div>
-
+<div id="footer" class="container_12">
+<nav>
+    <div class="base_text horizontal grid_9 push_3">
+        <ul>
+            <li><a href="/disclaimer/">Disclaimer</a></li>
+            <li><a href="/copyright/">Copyright</a></li>
+            <li><a href="/privacy/">Privacy Policy</a></li>
+        </ul>
+    </div>
+</nav>
+</div>
+<script type="text/javascript">
+$(function() {
+ 
+    var menu_ul = $('.menu > li > ul'),
+        menu_a  = $('.menu > li > a');
+     
+    menu_ul.hide();
+ 
+    menu_a.click(function(e) {
+        e.preventDefault();
+        if(!$(this).hasClass('active')) {
+            menu_a.removeClass('active');
+            menu_ul.filter(':visible').slideUp('normal');
+            $(this).addClass('active').next().stop(true,true).slideDown('normal');
+        } else {
+            $(this).removeClass('active');
+            $(this).next().stop(true,true).slideUp('normal');
+        }
+    });
+ 
+});
+</script>
 </body>
 </html>

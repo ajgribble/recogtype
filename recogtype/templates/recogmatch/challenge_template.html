@@ -1,12 +1,15 @@
 {% extends 'recogmatch/dashboard.html' %}
 
-{% block title %}Typing Challenge | RecogType{% endblock title %}
+{% block title %}
+    Typing Challenge {{ challenge.title }} | RecogType
+{% endblock title %}
 
 {% block recogmatch_content %}
 <div class="grid_8 push_1 container">
     
 <h2>{{ challenge.title }}</h2>
-{{ challenge.body|safe }}
+{% include template_path %}
+
 <hr />
 
 <form id="raw_data_form">
@@ -59,7 +62,8 @@
         $.post("{% url match_submit user.username challenge.id %}",
                raw_data,
                function(responseData) {
-                   $('#message').html("Sent!");
+                   //$('#message').html("Sent!");
+                   window.location.replace("{% url match_dash user.username %}"); 
                }
         ); 
 
