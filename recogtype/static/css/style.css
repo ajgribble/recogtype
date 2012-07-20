@@ -269,7 +269,8 @@ form
 form a, a:visited
 {
     text-decoration: underline;
-    color: #FFF;
+    color: #06E;
+    margin-right: 35px;
 }
 .form_row
 {
@@ -280,7 +281,6 @@ form h3
     font-size: 24px;
     margin-bottom: 20px;
 }
-
 label
 {
     display: block;
@@ -290,6 +290,7 @@ label
 label.check
 {
     margin-left: 25px;
+    display: inline;
 }
 label.error
 {   
@@ -318,6 +319,10 @@ input
 input#id_remember_me
 {
     position: absolute;
+}
+input#terms_services, #ts_link
+{
+    float: left;
 }
 input.button
 {
@@ -466,24 +471,60 @@ select
     margin-left: 40px;
     margin-bottom: 20px;
 }
-p > blockquote
-{
-    font-size: 12px;
-}
-.container blockquote
-{
-    color: #1E90FF;
-    font-style: italic;
-    font-variant: normal;
-    font-weight: lighter;
-    font-size: larger;
-    text-align: justify;
-}
 .text_row
 {
     padding: 5px;
 }
-
+#terms h3, #terms h4, #terms p, #terms ol, #terms ul
+{
+    color: #000;
+    font-family: "Courier 10 Pitch";
+}
+#terms h3
+{
+    font-size: large;
+}
+#terms h4
+{
+    font-size: medium;
+}
+#terms p
+{
+    font-size: small;
+}
+#terms ol ol li
+{
+    font-size: small;
+    list-style-type: lower-alpha;
+    margin-left: 50px;
+}
+#terms ol
+{
+    font-size: small;
+    list-style-type: upper-alpha;
+    margin-left: 50px;
+}
+#terms ul
+{
+    font-size: small;
+    list-style-type: circle;
+    margin-left: 50px;
+}
+div.ui-dialog-titlebar
+{
+    background-color: #B1A590;
+    border: 1px solid #20314C;
+}
+.ui-button
+{
+    background-color: #B1A590;
+    border: 1px solid #B1A590;
+}
+.ui-button-text
+{
+    color: #000;
+}
+    
 /* ==========================================================================
    Local Nav
    ========================================================================== */

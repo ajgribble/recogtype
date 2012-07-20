@@ -3,6 +3,41 @@
 {% block title %}Signup{% endblock title %}
 {% block scripts %}
 <script src="{{ STATIC_URL }}javascript/jquery.validate.js"></script>
+<script src="{{ STATIC_URL }}javascript/jquery-ui-1.8.21.min.js"></script>
+<script type="text/javascript">
+// Opens Terms and Services page in overlay window    
+$().ready(function() { 
+	$(document).ready(function() {
+		$('#signupForm a').each(function() {
+			var $link = $(this);
+			var $dialog = $('<div id="terms" class="dialog"></div>')
+				.load($link.attr('href') + ' .bod')
+				.dialog({
+					autoOpen: false,
+					title: "Terms and Conditions",
+                    width: 600,
+                    height: 400,
+                    modal: true,
+                    resizable: false,
+                    buttons: [
+                                {
+                                    text: "OK",
+                                    click: function() {
+                                                        $(this).dialog("close");
+                                                      }
+                                }
+                              ]
+				});
+
+			$link.click(function() {
+				$dialog.dialog('open');
+
+				return false;
+			});
+		});
+	});
+});
+</script>
 <script type="text/javascript">
 $().ready(function() {
     // Validates the signup form
@@ -20,6 +55,9 @@ $().ready(function() {
                 required: true,
                 minlength: 6,
                 equalTo: "#id_password1"
+            },
+            terms_services: {
+                required: true
             }
         },
         messages: {
@@ -34,7 +72,8 @@ $().ready(function() {
                 minlength: "Your password must be at least 6 \
                             characters long",
                 equalTo: "Your passwords do not match."
-            }
+            },
+            terms_services: "You must accept our terms"
         }
     });
 });
@@ -61,6 +100,12 @@ $().ready(function() {
         {% endif %}
         </div>
     {% endfor %}
+    <div class="form_row">
+        <input id="terms_services" type="checkbox" name="terms_services" />
+        <label for="terms_services" class="check">
+            <a id="ts_link" href="/terms-and-conditions/">Terms and Conditions</a>
+        </label>
+    </div>
     <input type="submit" class="button" value="Signup" />
 </form>
 </div>
