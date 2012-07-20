@@ -239,7 +239,6 @@ body
 
     margin: 0;
     padding: 0;
-    margin-top: 100px;
 }
 a
 {
@@ -247,42 +246,98 @@ a
 }
 
 /* Form Styling */
-fieldset
+form
 {
-    border: 1px solid #FFF;
-    border-radius: 20px;
-    padding: 10px;
+    background-color: #B1A590;
+    /*background-image: -webkit-gradient(linear, left top, left bottom, from(#B1A590),to(#FFFFFF));
+    background-image: -webkit-linear-gradient(top, #B1A590, #FFFFFF);
+    background-image: -moz-linear-gradient(top, #B1A590, #FFFFFF);
+    background-image: -o-linear-gradient(top, #B1A590, #FFFFFF);
+    background-image: -ms-linear-gradient(top, #B1A590, #FFFFFF);
+    background-image: linear-gradient(top, #B1A590, #FFFFFF);*/
+    margin: auto;
+    position: relative;
+    color: #FFFFFF;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid #20314C;
+    -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
 }
-form .form_row
+form a, a:visited
 {
-    clear: both;
-    padding: 10px;
+    text-decoration: underline;
+    color: #FFF;
 }
-.form_row .label
+.form_row
 {
-    float: left;
+    padding: 5px 0px 5px 20px;
+}
+form h3
+{
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+label
+{
+    display: block;
     text-align: left;
     margin-right: 10px;
-    width: 125px;
 }
-form .form_row .input
+label.check
 {
-    float: left;
+    margin-left: 25px;
+}
+label.error
+{   
+    display: inline;
     text-align: left;
+    color: #FF0000;
 }
-form .submit
+.errorlist
 {
-    text-align: center;
-    margin-top: 10px;
+    display: block;
+    color: #FF0000;
+    padding: 0px 20px;
 }
-form #id_mugshot
+input
 {
-    position: relative;
-    top: 0;
-    right: 0;
-    z-index: 2;
-    width: 220px;
-    color: #FFF;
+    display: inline;
+    border: 1px solid #20314C;
+    border-radius: 5px;
+    height: 25px;
+    padding: 5px;
+    margin-right: 10px;
+    -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+}
+input#id_remember_me
+{
+    position: absolute;
+}
+input.button
+{
+    height: 30px;
+    margin: 20px;
+}
+input.file_input
+{
+    height: 30px;
+    float: right;
+}
+select
+{
+    border: 1px solid #20314C;
+    border-radius: 5px;
+    height: 30px;
+    padding: 5px;
+    -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* ==========================================================================
@@ -291,9 +346,8 @@ form #id_mugshot
 #header
 {
     top: 0px;
-    right: 20px;
-    left: 20px;
-    position: fixed;
+    right: 0px;
+    left: 0px;
     height: 100px;
     background-color: #616975;
     background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(114, 122, 134)),to(rgb(80, 88, 100)));
@@ -322,6 +376,14 @@ form #id_mugshot
 {
     height: 80px;
 } 
+#header #message_bar
+{
+    height: 20px;
+    text-align: center;
+    background-color: #D8CDBA;
+    display: none;
+    border-radius: 5px 5px 0px 0px;
+}
 #session_status
 {
     margin:20px;
@@ -345,11 +407,26 @@ form #id_mugshot
    Content
    ========================================================================== */
 
+#content
+{
+    padding: 20px;
+}
 .container
 {
-    min-height: 400px;
     padding: 20px 0px 20px 0px;
-    background-color: #616975;
+    margin-bottom: 55px;
+    background: #4D5158;
+    border-radius: 10px;
+    height: auto;
+}
+.container a
+{
+    color: #FFF;
+    margin: 5px;
+}
+.container a:hover
+{
+    text-decoration: underline;
 }
 .container h1, h2, h3, h4, h5, h6, p
 {
@@ -387,7 +464,7 @@ form #id_mugshot
 .container li
 {
     margin-left: 40px;
-    font-size: 12px;
+    margin-bottom: 20px;
 }
 p > blockquote
 {
@@ -402,14 +479,9 @@ p > blockquote
     font-size: larger;
     text-align: justify;
 }
-#content .base_text
+.text_row
 {
-    color: #FFF;
-}
-#content .container a
-{
-    color: #FFF;
-    margin: 5px;
+    padding: 5px;
 }
 
 /* ==========================================================================
@@ -420,7 +492,6 @@ p > blockquote
 {
     margin: 1px auto;
     font-size: 0.8125em;    /* 13/16 = 0.8125*/
-    position: fixed;
     padding: 0;
 
 }
@@ -478,22 +549,22 @@ p > blockquote
 .menu > li > a:hover, 
 .menu > li > a.active 
 {
-    background-color: #35AFE3;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(69, 199, 235)),to(rgb(38, 152, 219)));
-    background-image: -webkit-linear-gradient(top, rgb(69, 199, 235), rgb(38, 152, 219));
-    background-image: -moz-linear-gradient(top, rgb(69, 199, 235), rgb(38, 152, 219));
-    background-image: -o-linear-gradient(top, rgb(69, 199, 235), rgb(38, 152, 219));
-    background-image: -ms-linear-gradient(top, rgb(69, 199, 235), rgb(38, 152, 219));
-    background-image: linear-gradient(top, rgb(69, 199, 235), rgb(38, 152, 219));
+    background-color: #857E72;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#857E72),to(#735A2F));
+    background-image: -webkit-linear-gradient(top, #857E72, #735A2F);
+    background-image: -moz-linear-gradient(top, #857E72, #735A2F);
+    background-image: -o-linear-gradient(top, #857E72, #735A2F);
+    background-image: -ms-linear-gradient(top, #857E72, #735A2F);
+    background-image: linear-gradient(top, #857E72, #735A2F);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#45C7EB', EndColorStr='#2698DB');
-    border-bottom: 1px solid #103C56;
-    -webkit-box-shadow: inset 0px 1px 0px 0px #6AD2EF;
-    -moz-box-shadow: inset 0px 1px 0px 0px #6AD2EF;
-    box-shadow: inset 0px 1px 0px 0px #6AD2EF;
+    border-bottom: 1px solid #857E72;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #735A2F;
+    -moz-box-shadow: inset 0px 1px 0px 0px #735A2F;
+    box-shadow: inset 0px 1px 0px 0px #735A2F;
 }
 .menu > li > a.active 
 {
-    border-bottom: 1px solid #1A638F;
+    border-bottom: 1px solid #735A2F;
 }
 .menu > li > a:before 
 {
@@ -596,9 +667,7 @@ p > blockquote
 
 #footer
 {
-    padding: 0 10px;
-    /*margin-top: 10px;
-    margin-bottom: 10px;*/
+    padding: 10px;
     bottom: 0px;
     right: 0px;
     left: 0px;
@@ -617,16 +686,12 @@ p > blockquote
 {
     color: #FFF;
     margin: 5px;
-    font-size: small;
+    font-size: medium;
     text-decoration: none;
 }
 #footer a:hover
 {
     text-decoration: underline;
-}
-#footer .base_text
-{
-    color: #FFF;
 }
 #footer #nav
 {
@@ -634,7 +699,16 @@ p > blockquote
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
     border-color: #FFF;
-} 
+}
+#footer ul li:first-child
+{
+    border-left: 1px solid #FFF;
+}
+#footer ul li
+{
+    border-right: 1px solid #FFF;
+    padding: 0px;
+}
 
 /* ==|== media queries ======================================================
    EXAMPLE Media Query for Responsive Design.

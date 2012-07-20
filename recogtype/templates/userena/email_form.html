@@ -1,25 +1,40 @@
 {% extends 'profiles/profile_base.html' %}
 
-{% block title %}Change Email | RecogType{% endblock %}
+{% block title %}Change Email{% endblock %}
+{% block scripts %}
+<script src="{{ STATIC_URL }}javascript/jquery.validate.js"></script>
+<script type="text/javascript">
+$().ready(function() {
+    // Validates the signup form
+    $("#emailResetForm").validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            }
+        },
+        messages: {
+            email:   "Please enter a valid email address"
+        }
+    });
+});
+</script>
+
+{% endblock scripts %}
 
 {% block profile_content %}
 
-<div class="grid_4 push_2">
-<form action="" method="post">
+<div class="grid_7">
+<form id="emailResetForm" action="" method="post">
+    <h3>Change Email Address</h3>
     {% csrf_token %}
-    <fieldset>
-    <legend class="base_text">Change email address</legend>
     {% for field in form %}
-        <div class="form_row base_text">
-            <div class="label"><label for="{{ field.name }}">{{ field.label }}:</div>
+        <div class="form_row">
+            <label for="{{ field.name }}">{{ field.label }}</label>
             {{ field }}
         </div>
     {% endfor %}
-        <div class="submit">
-            <input type="submit" value="Change email" />
-        </div>
-    </fieldset>
+        <input type="submit" class="button" value="Change email" />
 </form>
 </div>
-
 {% endblock profile_content %}

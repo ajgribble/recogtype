@@ -1,10 +1,9 @@
 {% block title %}Signup{% endblock title %}
 
 {% block content %}
+<div class="grid_5">
 <form action="" method="post">
     {% csrf_token %}
-    <fieldset>
-        <legend>Signup</legend>
         {% for field in sform %}
         <p>
         {{ field.errors }}
@@ -17,8 +16,8 @@
         {{ field.label_tag|title }}: {{ field }}
         </p>
         {% endfor %}
-        </fieldset>
-        <p><input type="submit" value="Signup" /></p>
+        <input type="submit" class="button" value="Signup" />
     </form>
+</div>
 {% endblock content %}
 

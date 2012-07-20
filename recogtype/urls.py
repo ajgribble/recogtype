@@ -3,6 +3,7 @@ from django.views.generic.simple import direct_to_template
 from django.contrib.auth import views as auth_views
 
 from profiles.forms import EditProfileFormMod 
+from profiles import views as profiles_views
 
 from userena import views as userena_views
 from userena import settings as userena_settings
@@ -23,9 +24,7 @@ urlpatterns = patterns('',
         userena_views.signin,
         name='userena_signin'),
     url(r'^signout/',
-        auth_views.logout,
-        {'next_page': userena_settings.USERENA_REDIRECT_ON_SIGNOUT,
-         'template_name': 'userena/signout.html'},
+        profiles_views.signout,
         name='userena_signout'),
     url(r'^profiles/(?P<username>[\.\w]+)/edit/$',
         userena_views.profile_edit,

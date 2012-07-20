@@ -1,58 +1,100 @@
 {% extends 'profiles/profile_base.html' %}
 
-{% block title %}Personal Details | RecogType{% endblock %}
+{% block title %}Personal Details{% endblock %}
 
 {% block profile_content %}
-<div class="grid_4 push_3">
-    <div class="container">
-        <div id="details">
-            <img src="{{ profile.get_mugshot_url }}" alt="Mugshot" />
-            <br /><br />
-            {% if profile.user.get_full_name %}
-            <p><strong>Name</strong><br /> {{ profile.user.get_full_name }}</p><br />
+<div id="details" class="grid_9 container">
+    <div class="text_row">
+        <img src="{{ profile.get_mugshot_url }}" alt="Mugshot" />
+    </div>
+    <br /><br /> 
+    <div class="text_row">
+        <h4><span>Name</span></h4>
+        <h5>
+        {% if profile.user.get_full_name %}
+            {{ profile.user.get_full_name }}
+        {% else %}
+            Unknown
+        {% endif %}
+        </h5> 
+    </div> 
+    <div class="text_row">
+        <h4><span>Email</span></h4>
+        <h5>
+        {% if profile.user.email %}
+            {{ profile.user.email }}
+        {% endif %}
+        </h5>
+    </div>
+    <div class="text_row">
+        <h4><span>Date of Birth</span></h4>
+        <h5>
+        {% if profile.dob %}
+            {{ profile.dob }}
+        {% else %}
+            Unknown
+        {% endif %}
+        </h5>
+    </div> 
+    <div class="text_row">
+        <h4><span>Sex</span></h4>
+        <h5>
+        {% if profile.sex %}
+            {% if profile.sex == 'M' %}
+                Male
+            {% else %}
+                Female
             {% endif %}
-            {% if profile.user.email %}
-            <p><strong>Email</strong><br />{{ profile.user.email }}</p><br />
+        {% else %}    
+            Unknown 
+        {% endif %} 
+        </h5>
+    </div>
+    <div class="text_row">
+        <h4><span>Handedness</span></h4> 
+        <h5>
+        {% if profile.handed %}
+            {% if profile.handed == 'R' %}
+                Right
+            {% elif profile.handed == 'L' %}
+                Left
+            {% else %}
+                Ambidextrous
             {% endif %}
-            {% if profile.dob %}
-            <p><strong>Date of Birth</strong><br /> {{ profile.dob }}</p><br />
-            {% endif %}
-            {% if profile.sex %}
-            <p><strong>Sex</strong><br />
-                {% if profile.sex == 'M' %}
-                    Male
-                {% else %}
-                    Female
-                {% endif %}
-            </p> <br />
-            {% endif %}
-            {% if profile.handed %}
-            <p><strong>Handedness</strong><br /> 
-                {% if profile.handed == 'R' %}
-                    Right
-                {% elif profile.handed == 'L' %}
-                    Left
-                {% else %}
-                    Ambidextrous
-                {% endif %}
-            </p><br />
-            {% endif %}
-            {% if profile.daily_usage %}
-            <p><strong>Daily Computer Usage</strong><br /> 
-                {{ profile.daily_usage }} hours a day
-            </p><br />
-            {% endif %}
-            {% if profile.country %}
-            <p><strong>Country of Origin</strong><br /> 
-                {{ profile.country }}
-            </p><br />
-            {% endif %}
-            {% if profile.language %}
-            <p><strong>Primary Spoken Language</strong><br /> 
-                {{ profile.language }}
-            </p>
-            {% endif %}
-        </div>
+        {% else %}    
+            Unknown
+        {% endif %}
+        </h5>
+    </div> 
+    <div class="text_row">
+        <h4><span>Daily Computer Usage</span></h4> 
+        <h5>
+        {% if profile.daily_usage %}
+            {{ profile.daily_usage }} hours a day
+        {% else %}        
+            Unknown
+        {% endif %}
+        </h5>
+    </div> 
+    <div class="text_row">
+        <h4><span>Country of Origin</span></h4> 
+        <h5>
+        {% if profile.country %}
+            {{ profile.country }}
+        {% else %}    
+            Unknown
+        {% endif %}
+        </h5>
+    </div> 
+    <div class="text_row">
+        <h4><span>Primary Spoken Language</span></h4> 
+        <h5>
+        {% if profile.language %}
+            {{ profile.language }}
+        {% else %}    
+            Unknown
+        {% endif %}
+        </h5>
     </div>
 </div>
 {% endblock %}

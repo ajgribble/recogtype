@@ -1,14 +1,12 @@
 {% extends 'profiles/profile_base.html' %}
 
-{% block title %}Email Change Complete | RecogType{% endblock %}
+{% block title %}Email Change Complete{% endblock %}
 
 {% block profile_content %}
-<div class="grid_6 push_1 container">
-    <p>You have received an email at {{ user.email }}.</p><br />
+<p>You have received an email at {{ user.email }}.</p><br />
 <p>To associate this email address with your account ({{ user.username }}) click on 
 the link provided in this email.</p><br />
 
 <p>Don't forget to use your new email address to log into the system once you've 
 accepted the update.</p>
-</div>   
 {% endblock %}

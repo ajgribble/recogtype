@@ -1,11 +1,10 @@
 {% extends 'recogmatch/dashboard.html' %}
 
 {% block title %}
-    Typing Challenge {{ challenge.title }} | RecogType
+    Typing Challenge {{ challenge.title }}
 {% endblock title %}
 
 {% block recogmatch_content %}
-<div class="grid_8 push_1 container">
     
 <h2>{{ challenge.title }}</h2>
 {% include template_path %}
@@ -22,7 +21,6 @@
     <p><input type="submit" value="Submit" /></p>
 </form>
 
-</div>
 <script src="http://api.jquery.com/scripts/events.js"></script>
 <script>
     var data = []

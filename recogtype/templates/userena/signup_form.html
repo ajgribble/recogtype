@@ -1,32 +1,67 @@
 {% extends 'base.html' %}
 
-{% block title %}Signup | RecogType{% endblock title %}
+{% block title %}Signup{% endblock title %}
+{% block scripts %}
+<script src="{{ STATIC_URL }}javascript/jquery.validate.js"></script>
+<script type="text/javascript">
+$().ready(function() {
+    // Validates the signup form
+    $("#signupForm").validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+            password1: { 
+                required: true,
+                minlength: 6
+            },
+            password2: {
+                required: true,
+                minlength: 6,
+                equalTo: "#id_password1"
+            }
+        },
+        messages: {
+            email:   "Please enter a valid email address",
+            password1: {
+                required: "You cannot leave this field blank",
+                minlength: "Your password must be at least 6 \
+                            characters long",
+            },
+            password2: {
+                required: "You cannot leave this field blank",
+                minlength: "Your password must be at least 6 \
+                            characters long",
+                equalTo: "Your passwords do not match."
+            }
+        }
+    });
+});
+</script>
 
+{% endblock scripts %}
 {% block content %}
 
-<div class="grid_4 push_4">
-<form id="form" action="" method="post">
+<div class="grid_7 push_3">
+<form id="signupForm" action="" method="post"> 
+    <h3>Sign Up For an Account</h3>
     {% csrf_token %}
-    <fieldset>
-        <legend class="base_text">Signup</legend>
         {% for field in form %}
-            <div class="form_row">
-            {{ field.errors }}
-            {% comment %} Displaying checkboxes differently {% endcomment %}
-            {% if field.name == 'tos' %}
-                <p class="checkbox">
-                <label for="id_{{ field.name }}" class="base_text">{{ field }} {{ field.label }}</label>
-                </p>
-            {% else %}
-                <div class="label"><label class="base_text">{{ field.label }}</label></div>
-                {{ field }}
-            {% endif %}
-            </div>
-        {% endfor %}
-        <div class="submit">
-            <input type="submit" value="Signup" />
+        <div class="form_row">
+        {{ field.errors }}
+        {% comment %} Displaying checkboxes differently {% endcomment %}
+        {% if field.name == 'tos' %}
+            <p class="checkbox">
+            <label for="id_{{ field.name }}">{{ field }} {{ field.label }}</label>
+            </p>
+        {% else %}
+            <label for="id_{{ field.name }}">{{ field.label }}</label>
+            {{ field }}
+        {% endif %}
         </div>
-    </fieldset>
+    {% endfor %}
+    <input type="submit" class="button" value="Signup" />
 </form>
 </div>
 {% endblock %}

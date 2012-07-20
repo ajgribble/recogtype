@@ -1,28 +1,29 @@
 {% extends 'profiles/profile_base.html' %}
 
-{% block title %}Profile Setup | RecogType{% endblock %}
+{% block title %}Profile Setup{% endblock %}
 
 {% block profile_content %}
 
-<div class="grid_8 push_1">
+<div class="grid_7">
 <form action="" enctype="multipart/form-data" method="post">
     {% csrf_token %}
-    <fieldset>
-    <legend class="base_text">Edit Profile</legend>
     {% for field in form %}
-        <div class="form_row base_text">
+        <div class="form_row">
+        {% if field.name == 'mugshot' %}
+            <!-- <div class="file_input">
+                <label>Profile Picture</label>{{ field }}
+            </div> -->       
+        {% else %}        
             <div class="label">
-                <label for="{{ field.name }}">{{ field.label }}:</label>
+                <label for="{{ field.name }}"><span>{{ field.label }}</span></label>
             </div>
-            <div class="input">
-                {{ field }}
-            </div>
+            {{ field }}
+        {% endif %}
         </div>
     {% endfor %}
         <div class="submit form_row">
             <input type="submit" value="Save Changes" />
         </div>
-    </fieldset>
 </form>
 </div>
 
