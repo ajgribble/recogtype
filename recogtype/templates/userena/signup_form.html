@@ -19,14 +19,6 @@ $().ready(function() {
                     height: 400,
                     modal: true,
                     resizable: false,
-                    buttons: [
-                                {
-                                    text: "OK",
-                                    click: function() {
-                                                        $(this).dialog("close");
-                                                      }
-                                }
-                              ]
 				});
 
 			$link.click(function() {
@@ -102,10 +94,8 @@ $().ready(function() {
     {% endfor %}
     <div class="form_row">
         <input id="terms_services" type="checkbox" name="terms_services" />
-        <label for="terms_services" class="check">
-            <a id="ts_link" href="/terms-and-conditions/">Terms and Conditions</a>
-        </label>
     </div>
+    <span id="ts_link">Click to accept  <a href="/terms-and-conditions/">Terms and Conditions</a>.</span>
     <input type="submit" class="button" value="Signup" />
 </form>
 </div>

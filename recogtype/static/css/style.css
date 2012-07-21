@@ -268,9 +268,13 @@ form
 }
 form a, a:visited
 {
+    display: inline;
     text-decoration: underline;
     color: #06E;
-    margin-right: 35px;
+}
+span#ts_link
+{
+    margin-left: 20px;
 }
 .form_row
 {
@@ -320,14 +324,16 @@ input#id_remember_me
 {
     position: absolute;
 }
-input#terms_services, #ts_link
+input#terms_services
 {
-    float: left;
+    display: inline;
+    margin-right: 200px;
 }
 input.button
 {
+    display: block;
     height: 30px;
-    margin: 20px;
+    margin: 30px 0px 0px 20px;
 }
 input.file_input
 {
