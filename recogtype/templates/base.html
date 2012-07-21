@@ -61,19 +61,26 @@
         <li class="item1"><a href="#">Dashboard<!-- <span>11</span> --></a>
             <ul>
                 <li class="subitem1">
-                <a href="{% url match_dash user.username %}">Dashboard Home </a></li>
+                <a href="{% url guide_user user.username %}">Dashboard Home</a></li>
                 <li class="subitem2">
                 <a href="{% url match_template user.username %}">Train System </a></li>
                 <li class="subitem3">
                 <a href="#">Challenge System </a></li>
             </ul>
         </li>
-        <li class="item2"><a href="#">Profile</a>
+        <li class="item2"><a href="#">Profile
+                    {% if request.session.profile_count != 0 %}
+                    <span>{{ request.session.profile_count }}</span>
+                    {% endif %}</a>
             <ul>
                 <li class="subitem1">
-                <a href="{% url userena_profile_detail user.username %}">Profile Home</a></li>
+                <a href="{% url userena_profile_detail user.username %}">Profile Home
+                    </a></li>
                 <li class="subitem2">
-                <a href="{% url userena_profile_edit user.username %}">Edit Details</a></li>
+                <a href="{% url userena_profile_edit user.username %}">Update Details
+                    {% if request.session.profile_count != 0 %}
+                    <span>{{ request.session.profile_count }}</span>
+                    {% endif %}</a></li>
                 <li class="subitem3">
                 <a href="{% url userena_password_change user.username %}">Change Password</a></li>
                 <li class="subitem4">

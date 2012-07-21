@@ -14,6 +14,6 @@ urlpatterns = patterns('',
         match_views.challenge,
         name='match_template'),
     url(r'^(?P<username>[\.\w]+)/$', 
-        match_views.dash,
-        name='match_dash'),
+        match_views.guide_user,
+        name='guide_user'),
 )

@@ -13,64 +13,51 @@ from recogmatch.forms import SubmitDataForm
 from datetime import date, timedelta
 
 @login_required
-def dash(request, username, template_name='recogmatch/dashboard.html',
+def guide_user(request, username, template_name='recogmatch/dashboard.html',
          extra_context=None):
 
-    # Initialize all variables to decide what to advise to the user
+    # Initialize user object
+    user = User.objects.get(username=username)
     mandatory_profile = {}
     suggested_profile = {}
-    user = User.objects.get(username=username)
+    user_profile = Profile.objects.get(user_id=user.id)
+    bio_template = False
+    
+    if user.first_name == '':
+        mandatory_profile['first name'] = True
 
-    def profile_update(mandatory_profile, suggested_profile, user):
-
-        user_profile = Profile.objects.get(user_id=user.id)
-        
-        if user.first_name == '':
-            mandatory_profile['first name'] = True
-
-        if user_profile.mugshot == '':
-            suggested_profile['mug shot'] = True
-       
-        if user_profile.dob:
-            if user_profile.dob >= date.today()-timedelta(days=6574.32):
-                mandatory_profile['date of birth'] = True
-        else:
+    if user_profile.mugshot == '':
+        suggested_profile['mug shot'] = True
+   
+    if user_profile.dob:
+        if user_profile.dob >= date.today()-timedelta(days=6574.32):
             mandatory_profile['date of birth'] = True
+    else:
+        mandatory_profile['date of birth'] = True
 
-        if user_profile.sex == '':
-            mandatory_profile['sex'] = True
+    if user_profile.sex == '':
+        mandatory_profile['sex'] = True
 
-        if user_profile.handed == '':
-            mandatory_profile['handedness'] = True
+    if user_profile.handed == '':
+        mandatory_profile['handedness'] = True
 
-        if user_profile.daily_usage == '':
-            mandatory_profile['daily computer usage'] = True
+    if user_profile.daily_usage == '':
+        mandatory_profile['daily computer usage'] = True
 
-        if user_profile.country == '':
-            mandatory_profile['country'] = True
-        
-        if user_profile.language == None:
-            mandatory_profile['first language'] = True
+    if user_profile.country == '':
+        mandatory_profile['country'] = True
+    
+    if user_profile.language == None:
+        mandatory_profile['first language'] = True
 
-        return mandatory_profile, suggested_profile
+    request.session['profile_count'] = len(mandatory_profile)
 
-    def bio_template_update(mandatory_profile, user):
-        
-        for key, val in mandatory_profile.items():
-            if key:
-                return
-        
+    if request.session['profile_count'] == 0:
         try:
             user_template = BioTemplate.objects.get(user_id=user.id)
         except ObjectDoesNotExist:             
             bio_template = True
-            return bio_template
 
-    (mandatory_profile, suggested_profile) = profile_update(mandatory_profile, 
-                                                    suggested_profile,
-                                                    user)
-    bio_template = bio_template_update(mandatory_profile, user)
-    
     return direct_to_template(request, template_name,
                              {'mandatory': mandatory_profile,
                               'suggested': suggested_profile,
@@ -98,6 +85,7 @@ def challenge(request, username, challenge=None,
 
     return direct_to_template(request, template_name,
                              {'url_chunks': url_chunks})
+
 @login_required
 @csrf_exempt
 def submit_raw_data(request, username, challenge_id):
