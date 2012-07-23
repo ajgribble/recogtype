@@ -4,10 +4,26 @@
     Typing Challenge {{ challenge.title }}
 {% endblock title %}
 
+{% block scripts %}
+<script type="text/javascript">
+$(function() {
+    $('a#instructions_expand').click(function(e) {
+        e.preventDefault();
+        $('p#challenge_instructions').toggle();
+    });
+});    
+</script>
+{% endblock scripts %}
+
 {% block recogmatch_content %}
     
+<div class="grid_9 container">
 <h2>{{ challenge.title }}</h2>
 {% include template_path %}
+<a id="instructions_expand" href="#">Challenge Instructions [+]</a>
+<p id="challenge_instructions">
+    {{ challenge.instructions|linenumbers|linebreaksbr }}
+</p>
 
 <hr />
 
@@ -15,14 +31,11 @@
     {% csrf_token %}
     <textarea id="raw_data" form="raw_data_form" autofocus="autofocus" 
         placeholder="Type the Text Above" cols=60 rows=5></textarea>
-    <br />
-    <br />
-    <label id="message"></label>
-    <p><input type="submit" value="Submit" /></p>
+    <input type="submit" class="button" value="Submit" />
 </form>
+</div>
 
-<script src="http://api.jquery.com/scripts/events.js"></script>
-<script>
+<script type="text/javascript">
     var data = []
     
     function keyObj(val_press, press_code, val_up, up_code, down, press, up) {
@@ -61,7 +74,7 @@
                raw_data,
                function(responseData) {
                    //$('#message').html("Sent!");
-                   window.location.replace("{% url match_dash user.username %}"); 
+                   window.location.replace("{% url guide_user user.username %}"); 
                }
         ); 
 

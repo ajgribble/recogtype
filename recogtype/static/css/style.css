@@ -244,18 +244,23 @@ a
 {
     text-decoration: none;
 }
+.disabled
+{
+    pointer-events: none;
+    cursor: default;
+}
 
 /* Form Styling */
 form
 {
-    background-color: #B1A590;
+    background: #B1A590;
     /*background-image: -webkit-gradient(linear, left top, left bottom, from(#B1A590),to(#FFFFFF));
     background-image: -webkit-linear-gradient(top, #B1A590, #FFFFFF);
     background-image: -moz-linear-gradient(top, #B1A590, #FFFFFF);
     background-image: -o-linear-gradient(top, #B1A590, #FFFFFF);
     background-image: -ms-linear-gradient(top, #B1A590, #FFFFFF);
     background-image: linear-gradient(top, #B1A590, #FFFFFF);*/
-    margin: auto;
+    margin-bottom: 50px;
     position: relative;
     color: #FFFFFF;
     text-decoration: none;
@@ -755,6 +760,83 @@ div.ui-dialog-titlebar
 {
     border-right: 1px solid #FFF;
     padding: 0px;
+}
+
+/* ==========================================================================
+   Challenge Styling
+   ========================================================================== */
+
+form#raw_data_form
+{
+    margin: 0px 20px;
+}
+textarea#raw_data
+{
+    width: 100%;
+}
+.challenge_fixed_text
+{
+    display: block;
+    background: #B1A590;
+    margin: 0px;
+    padding: 10px;
+    border: 1px solid #FFF;
+    border-radius: 10px;
+}
+ul#pagination_items
+{
+    display: block;
+    margin: 20px 140px;
+    width: auto;
+    height: 200px;
+}
+ul#pagination_items li
+{
+    float: left;
+    height: 180px;
+    width: 400px;
+    margin: 0px;
+}
+ol#pagination_controls
+{
+    position: relative;
+    text-align: center;
+    margin-bottom: 20px;
+    height: 40px;
+}
+ol#pagination_controls li
+{
+    display: inline-block;
+    background: #FFF;
+    text-align: left;
+    padding: 5px 10px;
+    margin: 0px;
+    cursor: pointer;
+}
+#pagination_controls li.prev, #pagination_controls li.next
+{
+    position: absolute;
+    border: 1px solid #000;
+    border-radius: 10px;
+    text-align: center;
+} 
+#pagination_controls li.next
+{
+    right: 140px;
+    width: 80px;
+}
+#pagination_controls li.prev
+{
+    left: 140px;
+    width: 80px;
+}
+a#instructions_expand
+{
+    margin-left: 20px;
+}
+p#challenge_instructions
+{
+    display: none;
 }
 
 /* ==|== media queries ======================================================

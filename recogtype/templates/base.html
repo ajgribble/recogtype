@@ -63,7 +63,12 @@
                 <li class="subitem1">
                 <a href="{% url guide_user user.username %}">Dashboard Home</a></li>
                 <li class="subitem2">
-                <a href="{% url match_template user.username %}">Train System </a></li>
+                {% if request.session.train_lock %}
+                    <a href="#" class="disabled">Train System <span class="lock">Locked</span></a>
+                {% else %}
+                    <a href="{% url match_template user.username %}">Train System </a>
+                {% endif %}
+                </li>
                 <li class="subitem3">
                 <a href="#">Challenge System </a></li>
             </ul>

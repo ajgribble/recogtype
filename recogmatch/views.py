@@ -16,13 +16,14 @@ from datetime import date, timedelta
 def guide_user(request, username, template_name='recogmatch/dashboard.html',
          extra_context=None):
 
-    # Initialize user object
+    # Initialize attributes
     user = User.objects.get(username=username)
     mandatory_profile = {}
     suggested_profile = {}
     user_profile = Profile.objects.get(user_id=user.id)
     bio_template = False
-    
+   
+    # Go through each profile attribute to verify existence
     if user.first_name == '':
         mandatory_profile['first name'] = True
 
@@ -50,13 +51,18 @@ def guide_user(request, username, template_name='recogmatch/dashboard.html',
     if user_profile.language == None:
         mandatory_profile['first language'] = True
 
+    # Update session to reflect navigation panel
     request.session['profile_count'] = len(mandatory_profile)
 
+    # If mandatory profile is fully updated, allow training
     if request.session['profile_count'] == 0:
+        request.session['train_lock'] = False
         try:
             user_template = BioTemplate.objects.get(user_id=user.id)
         except ObjectDoesNotExist:             
             bio_template = True
+    else:
+        request.session['train_lock'] = True
 
     return direct_to_template(request, template_name,
                              {'mandatory': mandatory_profile,
