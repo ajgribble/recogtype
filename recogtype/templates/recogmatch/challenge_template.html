@@ -19,7 +19,9 @@ $(function() {
     
 <div class="grid_9 container">
 <h2>{{ challenge.title }}</h2>
-{% include template_path %}
+{% with user.first_name as user %}
+    {% include template_path %}
+{% endwith %}
 <a id="instructions_expand" href="#">Challenge Instructions [+]</a>
 <p id="challenge_instructions">
     {{ challenge.instructions|linenumbers|linebreaksbr }}
@@ -29,8 +31,13 @@ $(function() {
 
 <form id="raw_data_form">
     {% csrf_token %}
-    <textarea id="raw_data" form="raw_data_form" autofocus="autofocus" 
-        placeholder="Type the Text Above" cols=60 rows=5></textarea>
+    {% if challenge.challenge_type == 'f' %}
+        <textarea id="raw_data" form="raw_data_form" autofocus="autofocus" 
+            placeholder="Type the text above" cols=60 rows=5></textarea>
+    {% else %}
+        <textarea id="raw_data" form="raw_data_form" autofocus="autofocus" 
+            placeholder="Respond to the text above" cols=60 rows=5></textarea>
+    {% endif %}
     <input type="submit" class="button" value="Submit" />
 </form>
 </div>
