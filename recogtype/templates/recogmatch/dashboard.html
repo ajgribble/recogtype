@@ -9,16 +9,22 @@
 <h3>Mandatory Tasks:</h3>
 </br>
 {% for key, val in mandatory.items %}
+    {% if key == 'train' %}
+    <p>Please complete a minimum of {{ progress.t_challenges_needed }} training 
+    challenges.</p>
+    {% else %}
     <p>Update your profile with your {{ key }}.</p>
+    {% endif %}
 {% endfor %}
-{% if bio_template %}
-    <p>Train the system by creating your biometric template.</p>
-{% endif %}
 <br /><br />
 <h3>Suggested Tasks:</h3>
 <br />
 {% for key, val in suggested.items %}
+    {% if key == 'train' %}
+    <p>Complete more training challenges to increase your model's accuracy.</p>
+    {% else %} 
     <p>Update your profile with your {{ key }}.</p>
+    {% endif %}
 {% endfor %}
 </div>
 {% endblock recogmatch_content %}

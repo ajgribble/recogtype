@@ -855,6 +855,10 @@ p#challenge_instructions
 {
     display: none;
 }
+a.challenge_complete, a.challenge_complete:hover
+{
+    text-decoration: line-through;
+}
 
 /* ==|== media queries ======================================================
    EXAMPLE Media Query for Responsive Design.

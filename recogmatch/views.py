@@ -11,6 +11,7 @@ from recogmatch.models import Challenge, RawSample, BioTemplate
 from recogmatch.forms import SubmitDataForm
 
 from datetime import date, timedelta
+from math import ceil
 
 @login_required
 def guide_user(request, username, template_name='recogmatch/dashboard.html',
@@ -18,71 +19,95 @@ def guide_user(request, username, template_name='recogmatch/dashboard.html',
 
     # Initialize attributes
     user = User.objects.get(username=username)
-    mandatory_profile = {}
-    suggested_profile = {}
+    mandatory = {}
+    suggested = {}
+    progress = {}
     user_profile = Profile.objects.get(user_id=user.id)
-    bio_template = False
    
     # Go through each profile attribute to verify existence
     if user.first_name == '':
-        mandatory_profile['first name'] = True
+        mandatory['first name'] = True
 
     if user_profile.mugshot == '':
-        suggested_profile['mug shot'] = True
+        suggested['mug shot'] = True
    
     if user_profile.dob:
         if user_profile.dob >= date.today()-timedelta(days=6574.32):
-            mandatory_profile['date of birth'] = True
+            mandatory['date of birth'] = True
     else:
-        mandatory_profile['date of birth'] = True
+        mandatory['date of birth'] = True
 
     if user_profile.sex == '':
-        mandatory_profile['sex'] = True
+        mandatory['sex'] = True
 
     if user_profile.handed == '':
-        mandatory_profile['handedness'] = True
+        mandatory['handedness'] = True
 
     if user_profile.daily_usage == '':
-        mandatory_profile['daily computer usage'] = True
+        mandatory['daily computer usage'] = True
 
     if user_profile.country == '':
-        mandatory_profile['country'] = True
+        mandatory['country'] = True
     
     if user_profile.language == None:
-        mandatory_profile['first language'] = True
+        mandatory['first language'] = True
 
     # Update session to reflect navigation panel
-    request.session['profile_count'] = len(mandatory_profile)
+    request.session['profile_count'] = len(mandatory)
 
     # If mandatory profile is fully updated, allow training
     if request.session['profile_count'] == 0:
         request.session['train_lock'] = False
         try:
-            user_template = BioTemplate.objects.get(user_id=user.id)
+            progress['t_complete_count'] = RawSample.objects.filter(user_id=user.id
+                                                           ).distinct(
+                                                           ).count(
+                                                           )
         except ObjectDoesNotExist:             
-            bio_template = True
+            progress['t_complete_count'] = 0
+
+        t_total_count = float(Challenge.objects.count())
+        progress['t_challenges_needed'] = int(ceil((t_total_count * 2) / 3))
+        progress['t_percent_complete'] = progress['t_complete_count'] \
+                                                / t_total_count * 100
+        
+        # Locks challenge link on nav panel if training isn't complete
+        if progress['t_percent_complete'] == 100:
+            pass
+        elif progress['t_percent_complete'] >= 65:
+            suggested['train'] = True
+            request.session['challenge_lock'] = False
+        else:
+            mandatory['train'] = True
+            request.session['challenge_lock'] = True
     else:
         request.session['train_lock'] = True
+        request.session['challenge_lock'] = True
 
     return direct_to_template(request, template_name,
-                             {'mandatory': mandatory_profile,
-                              'suggested': suggested_profile,
-                              'bio_template': bio_template})
+                             {'mandatory': mandatory,
+                              'suggested': suggested,
+                              'progress': progress})
 
 @login_required
 def challenge(request, username, challenge=None,
               template_name='recogmatch/biotemplate.html'):
     
     user = User.objects.get(username=username)
-    challenges = Challenge.objects.all()
+    challenge_list = Challenge.objects.filter(challenge_use='t')
 
     url_chunks = {}
+    challenges_complete = []
 
-    for item in challenges:
+    for item in challenge_list:
         url_title = slugify(item)
         url_chunks[item.title] = url_title
         template_path = 'recogmatch/challenges/' + url_title + '.html'
      
+        # If challenge is complete add to completed list
+        if RawSample.objects.filter(user_id=user.id, challenge_id=item.id).exists():
+            challenges_complete.append(item.title)
+        
         if challenge == url_title: 
             return direct_to_template(request, template_name,
                                      {'challenge': item,
@@ -90,7 +115,8 @@ def challenge(request, username, challenge=None,
                                       'template_path': template_path})                                
 
     return direct_to_template(request, template_name,
-                             {'url_chunks': url_chunks})
+                             {'url_chunks': url_chunks,
+                              'completed': challenges_complete})
 
 @login_required
 @csrf_exempt

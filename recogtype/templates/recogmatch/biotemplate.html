@@ -6,16 +6,25 @@
 
 <div class="grid_9 container">
     <h3>Training Challenges to Be Completed:</h3><br />
-    {% if url_chunks %}
     <ul>
     {% for key, val in url_chunks.items %}
+        {% if key not in completed %}
         <li>
             <a href="{% url match_train user.username val %}">{{ key }}</a>
         </li>
+        {% endif %}
     {% endfor %}
     </ul>
-    {% else %}
-        <p>You are fully trained!</p>
-    {% endif %}
+
+    <h3>Training Challenges Completed:</h3><br />
+    <ul>
+    {% for key, val in url_chunks.items %} 
+        {% if key in completed %}
+        <li>
+            <a class="challenge_complete" href="#">{{ key }}</a>
+        </li>
+        {% endif %}
+    {% endfor %}
+    </ul>
 </div>
 {% endblock recogmatch_content %}

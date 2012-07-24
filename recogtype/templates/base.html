@@ -41,7 +41,7 @@
                 {% endif %}
             </div> <!-- end #session_status -->
         </div><!-- end #nav -->
-        <div id="message_bar" class="grid_9 push_3">
+        <div id="message_bar" class="grid_9">
             {% if messages %}
             <ul class="messages">
                 {% for message in messages %}
@@ -71,7 +71,12 @@
                 {% endif %}
                 </li>
                 <li class="subitem3">
-                <a href="#">Challenge System </a></li>
+                {% if request.session.challenge_lock %}
+                    <a href="#">Challenge System <span class="lock">Locked</span></a>
+                {% else %}
+                    <a href="#">Challenge System</a>
+                {% endif %}
+                </li>
             </ul>
         </li>
         <li class="item2"><a href="#">Profile
