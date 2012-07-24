@@ -400,6 +400,22 @@ select
     display: none;
     border-radius: 5px 5px 0px 0px;
 }
+div#logo_container
+{
+    overflow: hidden;
+    height: 100px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+img#header_logo
+{
+    position: relative;
+    top: -10px;
+    left: -20px;
+    width: 250px;
+    height: 120px;
+}
 #session_status
 {
     margin:20px;

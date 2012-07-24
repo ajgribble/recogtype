@@ -22,7 +22,6 @@ class Challenge(models.Model):
     challenge_focus = models.CharField(max_length=300,
                                        verbose_name='Challenge Focus')
     instructions = models.TextField(verbose_name='Challenge Instructions')
-    body = models.TextField(verbose_name='Challenge Request')
 
     def __unicode__(self):
         return self.title 
