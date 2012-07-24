@@ -68,6 +68,8 @@ def guide_user(request, username, template_name='recogmatch/dashboard.html',
 
         t_total_count = float(Challenge.objects.count())
         progress['t_challenges_needed'] = int(ceil((t_total_count * 2) / 3))
+        progress['t_challenge_difference'] = progress['t_challenges_needed'] - \
+                                                progress['t_complete_count']
         progress['t_percent_complete'] = progress['t_complete_count'] \
                                                 / t_total_count * 100
         

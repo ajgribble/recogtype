@@ -66,6 +66,9 @@
                 <li class="subitem2">
                 {% if request.session.train_lock %}
                     <a href="#" class="disabled">Train System <span class="lock">Locked</span></a>
+                    {% elif progress.t_challenge_difference > 0 %} 
+                    <a href="{% url match_template user.username %}">Train System 
+                        <span>{{ progress.t_challenge_difference }}</span></a>
                 {% else %}
                     <a href="{% url match_template user.username %}">Train System </a>
                 {% endif %}
