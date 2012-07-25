@@ -17,40 +17,57 @@ from math import ceil
 def guide_user(request, username, template_name='recogmatch/dashboard.html',
          extra_context=None):
 
+    def calculate_progress(progress):
+        p_percent_complete = (float(progress['p_complete_count'])
+                                        / progress['p_total_count'])* 100
+        t_total_count = float(Challenge.objects.count())
+        progress['t_challenges_needed'] = int(ceil((t_total_count * 2) / 3))        
+        t_percent_complete = (float(progress['t_complete_count']) \
+                                       / progress['t_challenges_needed']) * 100
+        progress['overall_complete'] = (p_percent_complete + t_percent_complete)\
+                                        / 2
+        # Locks challenge link on nav panel if training isn't complete
+        if progress['overall_complete'] == 100:
+            pass
+        elif progress['overall_complete'] >= 65:
+            suggested.append('train')
+            request.session['challenge_lock'] = False
+        else:
+            mandatory.append('train')
+            request.session['challenge_lock'] = True
+        
+        return progress
+
     # Initialize attributes
     user = User.objects.get(username=username)
-    mandatory = {}
-    suggested = {}
-    progress = {}
+    mandatory = []
+    suggested = []
+    progress = {'overall_complete': 0,
+                't_complete_count': 0,
+                'p_total_count': 1} # Init at 1 for first_name in user obj
+
     user_profile = Profile.objects.get(user_id=user.id)
    
-    # Go through each profile attribute to verify existence
-    if user.first_name == '':
-        mandatory['first name'] = True
-
-    if user_profile.mugshot == '':
-        suggested['mug shot'] = True
-   
-    if user_profile.dob:
-        if user_profile.dob >= date.today()-timedelta(days=6574.32):
-            mandatory['date of birth'] = True
-    else:
-        mandatory['date of birth'] = True
-
-    if user_profile.sex == '':
-        mandatory['sex'] = True
-
-    if user_profile.handed == '':
-        mandatory['handedness'] = True
-
-    if user_profile.daily_usage == '':
-        mandatory['daily computer usage'] = True
-
-    if user_profile.country == '':
-        mandatory['country'] = True
+    # Go through each user/profile attribute to verify existence
+    if user.first_name == '' :
+        mandatory.append(key.replace('_', ' '))
     
-    if user_profile.language == None:
-        mandatory['first language'] = True
+    profile_ignore = ['mugshot', 'user_id', 'id', '_state', 'privacy']
+    for key, val in user_profile.__dict__.iteritems():
+        if key not in profile_ignore:
+            progress['p_total_count'] = progress['p_total_count'] + 1
+            if key == 'dob':
+                if not val:
+                    mandatory.append(key)
+            elif key == 'language':
+                if val == None:
+                    mandatory.append(key)
+            else:
+                if val == '':
+                    mandatory.append(key.replace('_', ' '))
+    
+    # Insert number of profile completion
+    progress['p_complete_count'] = progress['p_total_count'] - len(mandatory)
 
     # Update session to reflect navigation panel
     request.session['profile_count'] = len(mandatory)
@@ -65,26 +82,16 @@ def guide_user(request, username, template_name='recogmatch/dashboard.html',
                                                            )
         except ObjectDoesNotExist:             
             progress['t_complete_count'] = 0
-
-        t_total_count = float(Challenge.objects.count())
-        progress['t_challenges_needed'] = int(ceil((t_total_count * 2) / 3))
-        progress['t_challenge_difference'] = progress['t_challenges_needed'] - \
-                                                progress['t_complete_count']
-        progress['t_percent_complete'] = progress['t_complete_count'] \
-                                                / t_total_count * 100
+ 
+        # Calls the calculate progress method to update the progress dictionary
+        progress = calculate_progress(progress)
         
-        # Locks challenge link on nav panel if training isn't complete
-        if progress['t_percent_complete'] == 100:
-            pass
-        elif progress['t_percent_complete'] >= 65:
-            suggested['train'] = True
-            request.session['challenge_lock'] = False
-        else:
-            mandatory['train'] = True
-            request.session['challenge_lock'] = True
     else:
         request.session['train_lock'] = True
         request.session['challenge_lock'] = True
+        
+        # Calls the calculate progress method to update the progress dictionary
+        progress = calculate_progress(progress)
 
     return direct_to_template(request, template_name,
                              {'mandatory': mandatory,

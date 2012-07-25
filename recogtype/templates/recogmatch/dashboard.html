@@ -2,30 +2,58 @@
 
 {% block title %}Dashboard{% endblock title %}
 
+{% block scripts %}
+<script type="text/javascript">
+    $(function () {
+        if ({{ progress.overall_complete }} <= 0) {
+            $('#progress_meter').hide();
+        } else {
+            $('#progress_meter').css('width', {{ progress.overall_complete }} + '%');
+        };
+    });
+</script>
+{% endblock scripts %}
+
 {% block content %}
 {% block recogmatch_content %}
 
 <div class="grid_9 container">
-<h3>Mandatory Tasks:</h3>
-</br>
-{% for key, val in mandatory.items %}
-    {% if key == 'train' %}
-    <p>Please complete a minimum of {{ progress.t_challenges_needed }} training 
-    challenges.</p>
+    <h3>
+        {% if user.first_name != '' %}
+            {{ user.first_name }}'s
+        {% endif %}
+        RecogType Progress</h3>
+    <div id="progress_container">
+        <span>{{ progress.overall_complete|floatformat }}% Complete</span>
+        <div id="progress_meter">
+        </div>
+    </div>
+    <h3>Mandatory Tasks:</h3>
+    {% if not mandatory %}
+        <p>You're fully up to date!</p>
     {% else %}
-    <p>Update your profile with your {{ key }}.</p>
+        {% for item in mandatory %}
+            {% if item == 'train' %}
+            <p>Please complete a minimum of {{ progress.t_challenges_needed }} training 
+            challenges.</p>
+            {% else %}
+            <p>Update your profile with your {{ item }}.</p>
+            {% endif %}
+        {% endfor %}
     {% endif %}
-{% endfor %}
-<br /><br />
-<h3>Suggested Tasks:</h3>
-<br />
-{% for key, val in suggested.items %}
-    {% if key == 'train' %}
-    <p>Complete more training challenges to increase your model's accuracy.</p>
-    {% else %} 
-    <p>Update your profile with your {{ key }}.</p>
+    <br />
+    <h3>Suggested Tasks:</h3>
+    {% if not suggested %}
+        <p>Nothing to suggest right now but we'll find something for you.</p>
+    {% else %}
+        {% for item in suggested %}
+            {% if item == 'train' %}
+            <p>Complete more training challenges to increase your model's accuracy.</p>
+            {% else %} 
+            <p>Update your profile with your {{ key }}.</p>
+            {% endif %}
+        {% endfor %}
     {% endif %}
-{% endfor %}
 </div>
 {% endblock recogmatch_content %}
 {% endblock content %}
