@@ -6,23 +6,39 @@ import socket
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
-if socket.get_hostname() == 'localhost':
+if socket.gethostname() == 'grib-Lenovo-IdeaPad-Y530':
     DEBUG = True
     DEBUG_TOOLBAR_CONFIG = {
                                 'INTERCEPT_REDIRECTS': False,
                            }
-
+    # Additional locations of static files
+    STATICFILES_DIRS = (
+        # Put strings here, like "/home/html/static" or "C:/www/django/static".   
+        '/home/grib/PythonProjects/recogtype/recogtype/static/',
+    )
 else:
     DEBUG = False
     DEFAULT_FROM_EMAIL = 'debug@recogtype.com'
     SERVER_EMAIL = 'error@recogtype.com'
+    STATICFILES_DIRS = (
+            # Put strings here, like "/home/html/static" or "C:/www/django/static".   
+            '/home/ajgribble/webapps/django/recogtype/recogtype/static/',
+    )
 
 TEMPLATE_DEBUG = DEBUG
 ADMINS = (
+    ('Adam Gribble', 'agribble@recogtype.com'),
 )
 MANAGERS = ADMINS
 
 DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'recogtype',
+        'USER': 'postgres',
+        'PASSWORD': '14elbbirg14',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -64,12 +80,6 @@ MEDIA_URL = ''
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
-
-# Additional locations of static files
-STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".   
-    '/home/grib/PythonProjects/recogtype/recogtype/static/',
-)
 
 # List of finder classes that know how to find static files in
 # various locations.
