@@ -2,23 +2,27 @@
 
 import os.path
 import posixpath
+import socket
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
-DEBUG = True
-DEBUG_TOOLBAR_CONFIG = {
-                            'INTERCEPT_REDIRECTS': False,
-                       }
+if socket.get_hostname() == 'localhost':
+    DEBUG = True
+    DEBUG_TOOLBAR_CONFIG = {
+                                'INTERCEPT_REDIRECTS': False,
+                           }
+
+else:
+    DEBUG = False
+    DEFAULT_FROM_EMAIL = 'debug@recogtype.com'
+    SERVER_EMAIL = 'error@recogtype.com'
+
 TEMPLATE_DEBUG = DEBUG
-
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
 )
-
 MANAGERS = ADMINS
 
 DATABASES = {
-    'default': { 'db settings'
     }
 }
 
