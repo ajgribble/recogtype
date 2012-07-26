@@ -6,7 +6,7 @@ import socket
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
-if socket.gethostname() == 'grib-Lenovo-IdeaPad-Y530':
+if socket.gethostname() == '':
     DEBUG = True
     DEBUG_TOOLBAR_CONFIG = {
                                 'INTERCEPT_REDIRECTS': False,
@@ -27,18 +27,12 @@ else:
 
 TEMPLATE_DEBUG = DEBUG
 ADMINS = (
-    ('Adam Gribble', 'agribble@recogtype.com'),
+    (''),
 )
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'recogtype',
-        'USER': 'postgres',
-        'PASSWORD': '14elbbirg14',
-        'HOST': 'localhost',
-        'PORT': '',
     }
 }
 
