@@ -31,6 +31,9 @@ class RawSample(models.Model):
     data = models.TextField(verbose_name='Raw Data')
     date_supplied = models.DateField(auto_now_add=True, verbose_name='Date Supplied')
     challenge_id = models.ForeignKey(Challenge, verbose_name='Challenge ID')
+    os = models.CharField(max_length=25, verbose_name='OS')
+    browser = models.CharField(max_length=50, verbose_name='Browser')
+    keyboard = models.CharField(max_length=50, verbose_name="Keyboard")
     
 class BioTemplate(models.Model):
     user = models.OneToOneField(User, unique=True, verbose_name='Username')

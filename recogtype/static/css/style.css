@@ -820,9 +820,14 @@ form#raw_data_form
 {
     margin: 0px 20px;
 }
+.container hr
+{
+    margin: 5px 20px 20px 20px
+}
 textarea#raw_data
 {
     width: 100%;
+    margin-bottom: 10px;
 }
 .challenge_fixed_text
 {
@@ -882,7 +887,7 @@ ol#pagination_controls li
 a#instructions_expand
 {
     display: block;
-    margin-top: 50px;
+    margin-top: 30px;
     margin-left: 20px;
 }
 p#challenge_instructions

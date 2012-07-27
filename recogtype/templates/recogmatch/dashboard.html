@@ -7,6 +7,8 @@
     $(function () {
         if ({{ progress.overall_complete }} <= 0) {
             $('#progress_meter').hide();
+        } else if ({{ progress.overall_complete }} >= 100) {
+            $('#progress_meter').css('width', '100%');
         } else {
             $('#progress_meter').css('width', {{ progress.overall_complete }} + '%');
         };
@@ -24,7 +26,11 @@
         {% endif %}
         RecogType Progress</h3>
     <div id="progress_container">
+        {% if progress.overall_complete > 100 %}
+        <span>100% Complete</span>
+        {% else %}
         <span>{{ progress.overall_complete|floatformat }}% Complete</span>
+        {% endif %}
         <div id="progress_meter">
         </div>
     </div>

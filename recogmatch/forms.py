@@ -1,21 +1,31 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from recogmatch.models import Challenge, RawSample
-
-class SubmitDataForm(forms.ModelForm):
+class SubmitDataForm(forms.Form):
     """ Basic form to capture raw keystrokes from the user """
-    data = forms.CharField(label=_(u'Challenge Response'),
-                              required=True)
     
-    def __init__(self, *args, **kw):
-        super(forms.ModelForm, self).__init__(*args, **kw)
-
-    class Meta:
-        model = RawSample
-        exclude = ['user', 'date_supplied', 'challenge_id']
-
-    def save(self, force_insert=False, force_update=False, commit=True):
-        data = super(SubmitDataForm, self).save(commit=commit)
-
-        return data
+    KeyboardChoices=(
+                            ('us_full', 'Standard US Full'),
+                            ('us_lap', 'Standard US Laptop'),
+                            ('uk_full', 'Standard UK Full'),
+                            ('uk_lap', 'Standard UK Laptop'),
+                            ('us_erg', 'Ergonomic US'),
+                            ('uk_erg', 'Ergonomic UK'),
+                            ('extended_full', 'Full With Non-English Characters'),
+                            ('extended_lap', 'Laptop With Non-English Characters'),
+                    )
+    
+    data = forms.CharField(label=_(u'Challenge Response'),
+                           required=True,
+                           widget=forms.Textarea(attrs={
+                                                        'id': 'raw_data',
+                                                        'form': 'raw_data_form',
+                                                        'autofocus': 'autofocus',
+                                                        'cols': 60,
+                                                        'rows': 5
+                                                        }
+                                                )
+                           )
+    
+    keyboard = forms.ChoiceField(label='Keyboard Type',
+                                 choices=KeyboardChoices)

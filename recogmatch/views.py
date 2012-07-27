@@ -5,6 +5,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.template.defaultfilters import slugify
+from django.template import RequestContext
+from django.shortcuts import render
+from django.contrib import messages
 
 from profiles.models import Profile
 from recogmatch.models import Challenge, RawSample, BioTemplate
@@ -104,6 +107,7 @@ def challenge(request, username, challenge=None,
     
     user = User.objects.get(username=username)
     challenge_list = Challenge.objects.filter(challenge_use='t')
+    data_form = SubmitDataForm()
 
     url_chunks = {}
     challenges_complete = []
@@ -118,10 +122,11 @@ def challenge(request, username, challenge=None,
             challenges_complete.append(item.title)
         
         if challenge == url_title: 
-            return direct_to_template(request, template_name,
+            return render(request, template_name,
                                      {'challenge': item,
                                       'url_title': url_title,
-                                      'template_path': template_path})                                
+                                      'template_path': template_path,
+                                      'data_form': data_form})                                
 
     return direct_to_template(request, template_name,
                              {'url_chunks': url_chunks,
@@ -130,15 +135,15 @@ def challenge(request, username, challenge=None,
 @login_required
 @csrf_exempt
 def submit_raw_data(request, username, challenge_id):
-    raw_data = request.POST['data']
-    user = User.objects.get(username=username)
-    challenge = Challenge.objects.get(id=challenge_id)
-
     sample = RawSample()
-    sample.user = user
-    sample.data = raw_data
-    sample.challenge_id=challenge
+    sample.user = User.objects.get(username=username)
+    sample.data = request.POST['raw_data']
+    sample.challenge_id = Challenge.objects.get(id=challenge_id)
+    sample.browser = request.POST['browser']
+    sample.os = request.POST['os']
+    sample.keyboard = request.POST['keyboard']
     sample.save()
-
-    return HttpResponse(raw_data)
+    messages.success(request, 'Challenge complete!')
+    
+    return HttpResponse("Success")
     

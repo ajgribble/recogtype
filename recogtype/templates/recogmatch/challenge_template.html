@@ -5,8 +5,12 @@
 {% endblock title %}
 
 {% block scripts %}
+<script type="text/javascript" src="{{ STATIC_URL }}javascript/jquery.browser.js">
+</script>
 <script type="text/javascript">
 $(function() {
+
+    // Function to give challenge instructions ability to expand/contract
     $('a#instructions_expand').click(function(e) {
         e.preventDefault();
         $('p#challenge_instructions').toggle();
@@ -29,28 +33,39 @@ $(function() {
 
 <hr />
 
-<form id="raw_data_form">
+<form id="raw_data_form" method="post">
     {% csrf_token %}
+    {% for field in data_form %}
+        <p>{{ field.errors }}</p>
+        <p>{{ field.label_tag }}</p>
+        <p>{{ field }}</p>
+    {% endfor %}
+    {% comment %}
     {% if challenge.challenge_type == 'f' %}
         <textarea id="raw_data" form="raw_data_form" autofocus="autofocus" 
             placeholder="Type the text above" cols=60 rows=5></textarea>
     {% else %}
         <textarea id="raw_data" form="raw_data_form" autofocus="autofocus" 
             placeholder="Respond to the text above" cols=60 rows=5></textarea>
-    {% endif %}
+        {% endif %}
+        {% endcomment %}
     <input type="submit" class="button" value="Submit" />
 </form>
+<div id="test"></div>
 </div>
 
 <script type="text/javascript">
+$(function() {
     var data = []
-    
+    var browser = $.browser.name + $.browser.versionX
+    var os = $.os.name
+
     function keyObj(val_press, press_code, val_up, up_code, down, press, up) {
-        this.down = down;
-        this.press = press;
-        this.up = up;
-        this.val_press = val_press;
-        this.press_code = press_code;
+        this.down = down
+        this.press = press
+        this.up = up
+        this.val_press = val_press
+        this.press_code = press_code
         this.val_up = val_up
         this.up_code = up_code
     }
@@ -68,24 +83,26 @@ $(function() {
     });
     $('#raw_data').keyup(function(event) {
         if (event.which != 16 && event.which != 17 && event.which != 18) {
-            up = event.timeStamp;
-            val_up = String.fromCharCode(event.which);
-            up_code = event.which;
-            data.push(new keyObj(val_press, press_code, val_up, up_code, down,press,up));
+            val_up = String.fromCharCode(event.which)
+            up_code = event.which
+            up = event.timeStamp
+            data.push(new keyObj(val_press, press_code, val_up, up_code,
+                                 down,  press, up));
         }
     });
     $('#raw_data_form').submit(function() {
-        raw_data = {}
-        raw_data.data = JSON.stringify(data);
+        var raw_data = JSON.stringify(data);
+        var keyboard = $('#id_keyboard').val();
         $.post("{% url match_submit user.username challenge.id %}",
-               raw_data,
-               function(responseData) {
-                   //$('#message').html("Sent!");
-                   window.location.replace("{% url guide_user user.username %}"); 
-               }
-        ); 
-
+                { raw_data: raw_data,
+                  browser: browser,
+                  os: os,
+                  keyboard: keyboard },
+                  function(responseData) {
+                        window.location.replace("{% url guide_user user.username %}"); 
+                });
         return false;
     });
+});
 </script>
 {% endblock recogmatch_content %}
