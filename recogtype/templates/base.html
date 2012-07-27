@@ -66,19 +66,22 @@
                 <li class="subitem2">
                 {% if request.session.train_lock %}
                     <a href="#" class="disabled">Train System <span class="lock">Locked</span></a>
-                    {% elif progress.t_challenge_difference > 0 %} 
+                {% elif progress.t_challenge_difference > 0 %} 
                     <a href="{% url match_template user.username %}">Train System 
-                        <span>{{ progress.t_challenge_difference }}</span></a>
+                    <span>{{ progress.t_challenge_difference }}</span></a>
                 {% else %}
                     <a href="{% url match_template user.username %}">Train System </a>
                 {% endif %}
                 </li>
                 <li class="subitem3">
+                    <a href="#" class="disabled">Challenge System <span class="lock">Disabled</span></a>
+                {% comment %}
                 {% if request.session.challenge_lock %}
-                    <a href="#">Challenge System <span class="lock">Locked</span></a>
+                    <a href="#" class="disabled">Challenge System <span class="lock">Locked</span></a>
                 {% else %}
                     <a href="#">Challenge System</a>
                 {% endif %}
+                {% endcomment %}
                 </li>
             </ul>
         </li>
@@ -101,15 +104,19 @@
                 <a href="{% url userena_email_change user.username %}">Change Email</a></li>
             </ul>
         </li>
-        <li class="item3"><a href="#">Help</a>
+        <li class="item3"><a href="#">Help<span>Disabled</span></a>
             <ul>
             </ul>
         </li>
     </ul>
 </div>
 </div>
+<div class="grid_9">
+{% else %}
+<div class="grid_9 push_3">
 {% endif %}
 {% block content %}{% endblock content %}
+</div>
 </div>
 <div id="footer">
 <nav class="container_12">

@@ -492,10 +492,17 @@ img#header_logo
 {
     font-size: 14px;
 }
-.container li
+.container ul li
 {
-    margin-left: 40px;
+    font-size: small;
+    margin-left: 50px;
     margin-bottom: 20px;
+    color: #FFF;
+    list-style-type: circle;
+}
+.container ul
+{
+    margin-top: 20px;
 }
 .text_row
 {
