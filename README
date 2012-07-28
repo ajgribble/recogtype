@@ -5,7 +5,7 @@ Details
 -------
 
 Author: Adam Gribble
-Version: 0.7.1
+Version: 0.9.1
 
 Dependencies
 ------------
@@ -13,8 +13,14 @@ Dependencies
     * Django==1.4
     * Python==2.7
     * South==0.7.4
+    * djangocountries==1.2
+    * django-debug-toolbar==0.9.4
     * django-guardian==1.0.4
     * django-userena==1.0.2
     * easy-thumbnails==1.0-alpha-21
+    * matplotlib==1.0.1
+    * numpy==1.6.2
+    * scipy==0.10.1
+    * scikit-learn==0.11
     * psycopg2==2.4.5
     * wsgiref==0.1.2

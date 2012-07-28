@@ -25,18 +25,21 @@ def guide_user(request, username, template_name='recogmatch/dashboard.html',
                                         / progress['p_total_count'])* 100
         t_total_count = float(Challenge.objects.count())
         progress['t_challenges_needed'] = int(ceil((t_total_count * 2) / 3))        
+        progress['t_challenges_left'] = progress['t_challenges_needed'] -\
+                                            progress['t_complete_count']
         t_percent_complete = (float(progress['t_complete_count']) \
                                        / progress['t_challenges_needed']) * 100
         progress['overall_complete'] = (p_percent_complete + t_percent_complete)\
                                         / 2
         # Locks challenge link on nav panel if training isn't complete
-        if progress['overall_complete'] == 100:
-            pass
-        elif progress['overall_complete'] >= 65:
-            suggested.append('train')
+        if p_percent_complete == 100:
             request.session['challenge_lock'] = False
+            if progress['t_challenges_left'] <= 0:
+                if progress['t_complete_count'] < t_total_count:
+                    suggested.append('train')
+            else:
+                mandatory.append('train')
         else:
-            mandatory.append('train')
             request.session['challenge_lock'] = True
         
         return progress

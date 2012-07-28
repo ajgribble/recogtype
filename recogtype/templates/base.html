@@ -59,16 +59,20 @@
 <div class="grid_3">
 <div id="local_nav">
     <ul class="menu">
-        <li class="item1"><a href="#">Dashboard<!-- <span>11</span> --></a>
+        <li class="item1"><a href="#">Dashboard
+                {% if progress.t_challenges_left > 0 %} 
+                    <span>{{ progress.t_challenges_left }}</span>
+                {% endif %}
+                </a>
             <ul>
                 <li class="subitem1">
                 <a href="{% url guide_user user.username %}">Dashboard Home</a></li>
                 <li class="subitem2">
                 {% if request.session.train_lock %}
                     <a href="#" class="disabled">Train System <span class="lock">Locked</span></a>
-                {% elif progress.t_challenge_difference > 0 %} 
+                {% elif progress.t_challenges_left > 0 %} 
                     <a href="{% url match_template user.username %}">Train System 
-                    <span>{{ progress.t_challenge_difference }}</span></a>
+                    <span>{{ progress.t_challenges_left }}</span></a>
                 {% else %}
                     <a href="{% url match_template user.username %}">Train System </a>
                 {% endif %}
@@ -101,7 +105,10 @@
                 <li class="subitem3">
                 <a href="{% url userena_password_change user.username %}">Change Password</a></li>
                 <li class="subitem4">
+                <a href="#" class="disabled">Change Email<span>Disabled</span></a></li>
+                {% comment %}
                 <a href="{% url userena_email_change user.username %}">Change Email</a></li>
+                {% endcomment %}
             </ul>
         </li>
         <li class="item3"><a href="#">Help<span>Disabled</span></a>

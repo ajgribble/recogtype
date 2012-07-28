@@ -31,9 +31,37 @@ urlpatterns = patterns('',
         {'edit_profile_form': EditProfileFormMod},
         name='profiles_edit'),
 
+    # Reset password
+    url(r'^password/reset/$',
+       auth_views.password_reset,
+       {'template_name': 'userena/password_reset_form.html',
+        'email_template_name': 'userena/emails/password_reset_message.txt'},
+       name='userena_password_reset'),
+    url(r'^profiles/password/reset/done/$',
+       auth_views.password_reset_done,
+       {'template_name': 'profiles/password_reset_done.html'},
+       name='profiles_password_reset_done'),
+    url(r'^password/reset/confirm/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$',
+       auth_views.password_reset_confirm,
+       {'template_name': 'userena/password_reset_confirm_form.html'},
+       name='userena_password_reset_confirm'),
+    url(r'^password/reset/confirm/complete/$',
+       auth_views.password_reset_complete,
+       {'template_name': 'userena/password_reset_complete.html'}),
+
+    # Change password
+    url(r'^(?P<username>[\.\w]+)/password/$',
+       userena_views.password_change,
+       name='userena_password_change'),
+    url(r'^profiles/(?P<username>[\.\w]+)/password/complete/$',
+       userena_views.direct_to_user_template,
+       {'template_name': 'profiles/password_complete.html'},
+       name='profiles_password_change_complete'),
+    
     # Directive Package URLs
     url(r'^profiles/', include('userena.urls')),
     url(r'^dashboard/', include('recogmatch.urls')),   
     
+    # Admin
     url(r'^recogadmin/', include(admin.site.urls)),
 )

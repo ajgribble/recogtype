@@ -459,6 +459,19 @@ img#header_logo
 {
     text-decoration: underline;
 }
+a.expander
+{
+    text-size: medium;
+    display: block;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+div.expandable
+{
+    display: none;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
 .container h1, h2, h3, h4, h5, h6, p
 {
     color: #FFF;
@@ -475,6 +488,10 @@ img#header_logo
 .container h3
 {
     font-size: 20px;
+}
+h3.notes_header
+{
+    margin: 20px 0px;
 }
 .container h4
 {
@@ -503,6 +520,31 @@ img#header_logo
 .container ul
 {
     margin-top: 20px;
+}
+div.site_info
+{
+    border: 1px solid #FFF;
+    border-radius: 10px;
+    margin: 20px;
+    padding: 10px;
+}
+div.site_info ul.outer li
+{
+    font-size: medium;
+    list-style-type: none;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+ul.outer li ul.inner
+{
+    margin-top: 10px;
+}
+ul.outer li ul.inner li
+{
+    font-size: small;
+    list-style-type: circle;
+    margin-left: 30px;
+    margin-bottom: 5px;
 }
 .text_row
 {
@@ -839,12 +881,22 @@ textarea#raw_data
 .challenge_fixed_text
 {
     display: block;
-    background: #B1A590;
+    background: #FFF;
     margin: 0px;
     padding: 10px;
     border: 1px solid #FFF;
     border-radius: 10px;
     margin: 20px;
+}
+.challenge_fixed_text p
+{
+    color: #000;
+}
+ul li.challenge_fixed_text
+{
+    color: #000;
+    font-weight: bold;
+    font-size: medium;
 }
 ul#pagination_items
 {
@@ -904,6 +956,7 @@ p#challenge_instructions
 a.challenge_complete, a.challenge_complete:hover
 {
     text-decoration: line-through;
+    cursor: default;
 }
 
 /* ==|== media queries ======================================================

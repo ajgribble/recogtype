@@ -7,9 +7,9 @@
 {% block scripts %}
 <script type="text/javascript" src="{{ STATIC_URL }}javascript/jquery.browser.js">
 </script>
+<script src="{{ STATIC_URL }}javascript/jquery.validate.js"></script>
 <script type="text/javascript">
 $(function() {
-
     // Function to give challenge instructions ability to expand/contract
     $('a#instructions_expand').click(function(e) {
         e.preventDefault();
@@ -90,17 +90,30 @@ $(function() {
                                  down,  press, up));
         }
     });
+    // Validates the challenge form
+    var validator = $("#raw_data_form").validate({
+                        rules: {
+                            data: {
+                                required: true,
+                            }
+                        },
+                        messages: {
+                            data:   "You cannot submit an empty form"
+                        }
+                    });
     $('#raw_data_form').submit(function() {
         var raw_data = JSON.stringify(data);
         var keyboard = $('#id_keyboard').val();
-        $.post("{% url match_submit user.username challenge.id %}",
-                { raw_data: raw_data,
-                  browser: browser,
-                  os: os,
-                  keyboard: keyboard },
-                  function(responseData) {
-                        window.location.replace("{% url guide_user user.username %}"); 
-                });
+        if (validator.form()) {
+            $.post("{% url match_submit user.username challenge.id %}",
+                    { raw_data: raw_data,
+                      browser: browser,
+                      os: os,
+                      keyboard: keyboard },
+                      function(responseData) {
+                            window.location.replace("{% url guide_user user.username %}"); 
+                    });
+            }
         return false;
     });
 });

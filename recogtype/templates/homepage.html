@@ -1,62 +1,121 @@
 {% extends "base.html" %}
-{% block title %}Welcome | RecogType{% endblock title %}
+{% block title %}Welcome{% endblock title %}
 
+{% block scripts %}
+<script type="text/javascript">
+var mhwssik = ['c','i','"','<','e','l','"','c','l','a','r','l','=','c','l',
+               'm','i','f','t','o','.','e','e','e','a','m','a','l','p','b',
+               'r','a','p','.','"','t','o','<','a','g','h','i','c',' ','=',
+               '@','b','o','e',' ','@','m','b','r','a','g','a','e','g','e',
+               '/','i','t','b','>','s','o','g','s','r','e','>','"','c','o',
+               'm','y','r','y',':'];var vmcbclk = [65,11,52,0,33,22,38,73,
+               41,16,56,12,45,35,60,9,57,6,30,28,72,47,71,64,49,75,42,51,
+               70,20,4,10,32,34,46,68,36,76,1,29,3,19,27,2,7,62,21,66,26,
+               39,24,48,59,25,78,55,54,5,67,23,77,50,13,58,53,44,74,17,43,
+               18,61,79,8,40,14,37,31,63,69,15];
+var kxhzput= new Array();
+
+for(var i=0;i<vmcbclk.length;i++){
+    kxhzput[vmcbclk[i]] = mhwssik[i]; 
+}
+
+for(var i=0;i<kxhzput.length;i++){
+    document.write(kxhzput[i]);
+}
+</script>
+<noscript>Please enable Javascript to see the email address</noscript>
+<script type="text/javascript">
+$(function() {
+    // Function to give challenge instructions ability to expand/contract
+    $('.expander').click(function(e) {
+        e.preventDefault();
+        $(this).closest('a').next('.expandable').toggle();
+    });
+});
+</script>
+{% endblock scripts %}
 {% block content %}
 
 <div class="container">
 <h2>Welcome to RecogType!</h2><br />
-<h3>What is RecogType?</h3>
-<div class="text_row"><p>The short anwer is RecogType is a data collection and recognition 
-system created to support my MSc thesis at the University of Kent. The 
-theme of my thesis is "Keystroke Dynamics as a Biometric" which basically
-means "recognizing a user by how they type".</p></div><br />
+<div class="site_info">
+    <h3 class="notes_header">** IMPORTANT NOTES **</h3>
+    <ul class="outer">
+        <li>RecogType is officially open for testing in a production environment. If
+        you would like to be part of the testing team please email me at 
+        agribble@recogtype.com; I'll get you signed up and provide further 
+        details.
+        </li>
+        <li>Planned features not yet working:
+            <ul class="inner">
+                <li>Personalized page/challenge help</li>
+                <li>Password change</li>
+                <li>Recognition challenges</li>
+            </ul>
+        </li>
+    </ul>
+</div>
 
-<h3>Who can use RecogType?</h3>
-<div class="text_row"><p>As long as you are 18 or older you can use RecogType! No matter your
-typing style or skill you are welcome to join in the study.</p></div><br />
+<h3>Some common Q&A before you register:</h3>
 
-<h3>What are my responsibilities as a user?</h3>
-<div class="text_row"><p>As a user, you will be challenged to type on your keyboard as you normally 
-would but in different scenarios. For example, one challenge may ask you to
- simply type an excerpt of a book that has been provided to you. Another 
-challenge may be to type up a mock email to a friend. The goal is to get 
-you typing and extract your typing data.</p></div><br />
+<a href="#" class="expander">What is RecogType?</a>
+<div class="expandable"><p>The short answer is RecogType is a prototype for a 
+    data collection and recognition system created to support my MSc thesis 
+    at the University of Kent. The theme of my thesis is "Keystroke Dynamics 
+    as a Biometric" which basically means "recognizing a user by how they 
+    type". The main goal is to collect as much raw typing data and 
+    meta-data (data about the data) as possible. With enough, RecogType 
+    can then evolve it's recognition capabilities and interface to make it 
+    more accurate and user friendly.</p></div>
 
-<h3>What do you do with my data?</h3>
-<div class="text_row"><p>Whenever you supply us with your keystroke data it is immediately and securely
-saved in our project database. Your keystroke information is then studied 
-to find out how accurately we can model your typing style and how unique your 
-typing style is to you.</p></div><br />
+<a href="#" class="expander">Who can use RecogType?</a>
+<div class="expandable"><p>As long as you are 18 or older you can use RecogType! 
+    No matter your typing style or skill you are welcome to join in the 
+    study.</p></div>
 
-<h3>How long will you keep my data for?</h3>
-<div class="text_row"><p>Your account information will be kept until the end of this project, which 
-concludes in mid-September, no matter what. Your keystroke information will be kept until the 
-end of the research project as well.</p></div><br />
+<a href="#" class="expander">What are my responsibilities as a user?</a>
+<div class="expandable"><p>As a user, you will be challenged to type on your 
+    keyboard as you normally would but in different scenarios. For example, 
+    one challenge may ask you to simply type an excerpt of a book that has 
+    been provided to you. Another challenge may be to type up a mock email to 
+    a friend. The goal is to get you typing naturally and extract your 
+    data.</p></div>
 
-<h3>Who will have access to my data?</h3>
-<div class="text_row"><p>Your data will only be directly used by myself and my 
-overseeing advisor. Trusted 3rd parties, such as those servicing the 
-system in the case of an unforseen issue out of our control, 
-may also obtain access after explicit permission.</p></div><br />
+<a href="#" class="expander">What do you do with my data?</a>
+<div class="expandable"><p>Whenever you supply us with your keystroke data it 
+    is immediately and securely saved in our project database. Your keystroke 
+    information is then studied to find out how accurately we can model your 
+    typing style and how unique your typing style is to you.</p></div>
 
-<h3>How can I withdraw from the study?</h3>
-<div class="text_row"><p>If you've created an account and decided you would like to opt out 
-that is not a problem. Simply email me at **email here** and it will 
-be taken care of immediately. Whether you've completed 20 
-challenges or just recently created an account your information will 
-be wiped clean and your account removed from our system.</p></div><br />
+<a href="#" class="expander">How long will you keep my data for?</a>
+<div class="expandable"><p>Your account information will be kept until the end 
+    of this project, which concludes in mid-September, no matter what. Your 
+    keystroke information will be kept until the end of the research project as
+    well. There may be the possibility that future research is conducted on the
+    data provided, in this case you will be given the option whether or not to 
+    allow us to retain your data. If you allow us to retain your data it will 
+    be stripped of your email, password and first name making it 100% 
+    anonymous.</p></div>
 
-<h3>Where Can I Learn More?</h3>
-<div class="text_row"><p>Within the navigation bar at the top you can find a link to the FAQs
-page which will delve deeper into the project and give you, the user, the
-ability to email me with other questions you may have. This project also 
-aims to enlighten the user community on the technologies it is built-on 
-so the more questions the better!</p></div><br />
+<a href="#" class="expander">How can I withdraw from the study?</a>
+<div class="expandable"><p>If you've created an account and decided you would 
+    like to opt out that is not a problem. Simply email me at agribble@recogtype.com 
+    and it will be taken care of immediately. Whether you've completed 20 
+    challenges or just recently created an account your information will 
+    be wiped clean and your account removed from our system.</p></div>
 
-<h3>I'm Ready to Join! So...How?</h3>
-<div class="text_row"><p>Within the navigation bar at the top is the registration link. Simply
-follow it to the registration page and you'll be on your way to 
-understanding a technology that may prove to revolutionize the way your 
-computer is protected from unauthorized users!</p></div><br />
+<a href="#" class="expander">Where Can I Learn More?</a>
+<div class="expandable"><p>Within the navigation bar at the top you can find a 
+    link to the FAQs page which will delve deeper into the project and give 
+    you, the user, the ability to email me with other questions you may have. 
+    This project also aims to enlighten the user community on the technologies 
+    it is built-on so the more questions the better!</p></div>
+
+<a href="#" class="expander">I'm Ready to Join! So...How?</a>
+<div class="expandable"><p>Within the navigation bar at the top is the 
+    registration link. Simply follow it to the registration page and you'll 
+    be on your way to helping research a technology that may prove to 
+    revolutionize the way your computer is protected from unauthorized 
+    users!</p></div>
 </div>
 {% endblock content %}
