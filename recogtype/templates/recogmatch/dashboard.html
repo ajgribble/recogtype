@@ -4,16 +4,10 @@
 
 {% block scripts %}
 <script type="text/javascript">
-    $(function () {
-        if ({{ progress.overall_complete }} <= 0) {
-            $('#progress_meter').hide();
-        } else if ({{ progress.overall_complete }} >= 100) {
-            $('#progress_meter').css('width', '100%');
-        } else {
-            $('#progress_meter').css('width', {{ progress.overall_complete }} + '%');
-        };
-    });
+var complete = "{{ progress.overall_complete }}"; 
 </script>
+<script src="{{ STATIC_URL }}javascript/animation/dashboard.js" 
+        type="text/javascript"></script>
 {% endblock scripts %}
 
 {% block content %}

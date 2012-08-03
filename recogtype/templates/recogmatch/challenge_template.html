@@ -9,14 +9,11 @@
 </script>
 <script src="{{ STATIC_URL }}javascript/jquery.validate.js"></script>
 <script type="text/javascript">
-$(function() {
-    // Function to give challenge instructions ability to expand/contract
-    $('a#instructions_expand').click(function(e) {
-        e.preventDefault();
-        $('p#challenge_instructions').toggle();
-    });
-});    
+    var match_submit = "{% url match_submit user.username challenge.id %}";
+    var guide_user = "{% url guide_user user.username %}";
 </script>
+<script src="{{ STATIC_URL }}javascript/animation/challenge_template.js" 
+        type="text/javascript"></script>
 {% endblock scripts %}
 
 {% block recogmatch_content %}
@@ -40,82 +37,10 @@ $(function() {
         <p>{{ field.label_tag }}</p>
         <p>{{ field }}</p>
     {% endfor %}
-    {% comment %}
-    {% if challenge.challenge_type == 'f' %}
-        <textarea id="raw_data" form="raw_data_form" autofocus="autofocus" 
-            placeholder="Type the text above" cols=60 rows=5></textarea>
-    {% else %}
-        <textarea id="raw_data" form="raw_data_form" autofocus="autofocus" 
-            placeholder="Respond to the text above" cols=60 rows=5></textarea>
-        {% endif %}
-        {% endcomment %}
     <input type="submit" class="button" value="Submit" />
 </form>
-<div id="test"></div>
 </div>
 
-<script type="text/javascript">
-$(function() {
-    var data = []
-    var browser = $.browser.name + $.browser.versionX
-    var os = $.os.name
-
-    function keyObj(val_press, press_code, val_up, up_code, down, press, up) {
-        this.down = down
-        this.press = press
-        this.up = up
-        this.val_press = val_press
-        this.press_code = press_code
-        this.val_up = val_up
-        this.up_code = up_code
-    }
-    $('#raw_data').keydown(function(event) {
-        if (event.which != 16 && event.which != 17 && event.which != 18) {
-            down = event.timeStamp;
-        }
-    });
-    $('#raw_data').keypress(function(event) { 
-        if (event.which != 16 && event.which != 17 && event.which != 18) {
-            val_press = String.fromCharCode(event.which);
-            press_code = event.which;
-            press = event.timeStamp;
-        }
-    });
-    $('#raw_data').keyup(function(event) {
-        if (event.which != 16 && event.which != 17 && event.which != 18) {
-            val_up = String.fromCharCode(event.which)
-            up_code = event.which
-            up = event.timeStamp
-            data.push(new keyObj(val_press, press_code, val_up, up_code,
-                                 down,  press, up));
-        }
-    });
-    // Validates the challenge form
-    var validator = $("#raw_data_form").validate({
-                        rules: {
-                            data: {
-                                required: true,
-                            }
-                        },
-                        messages: {
-                            data:   "You cannot submit an empty form"
-                        }
-                    });
-    $('#raw_data_form').submit(function() {
-        var raw_data = JSON.stringify(data);
-        var keyboard = $('#id_keyboard').val();
-        if (validator.form()) {
-            $.post("{% url match_submit user.username challenge.id %}",
-                    { raw_data: raw_data,
-                      browser: browser,
-                      os: os,
-                      keyboard: keyboard },
-                      function(responseData) {
-                            window.location.replace("{% url guide_user user.username %}"); 
-                    });
-            }
-        return false;
-    });
-});
-</script>
+<script src="{{ STATIC_URL }}javascript/extras/raw_input.js" 
+        type="text/javascript"></script>
 {% endblock recogmatch_content %}

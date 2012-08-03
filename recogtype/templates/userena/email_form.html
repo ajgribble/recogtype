@@ -3,22 +3,7 @@
 {% block title %}Change Email{% endblock %}
 {% block scripts %}
 <script src="{{ STATIC_URL }}javascript/jquery.validate.js"></script>
-<script type="text/javascript">
-$().ready(function() {
-    // Validates the signup form
-    $("#emailResetForm").validate({
-        rules: {
-            email: {
-                required: true,
-                email: true
-            }
-        },
-        messages: {
-            email:   "Please enter a valid email address"
-        }
-    });
-});
-</script>
+<script src="{{ STATIC_URL }}javascript/validate/email_form.js" type="text/javascript"></script>
 
 {% endblock scripts %}
 
