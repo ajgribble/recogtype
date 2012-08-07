@@ -56,7 +56,7 @@ def guide_user(request, username, template_name='recogmatch/dashboard.html',
    
     # Go through each user/profile attribute to verify existence
     if user.first_name == '' :
-        mandatory.append(user.first_name.replace('_', ' '))
+        mandatory.append('first name')
     
     profile_ignore = ['mugshot', 'user_id', 'id', '_state', 'privacy']
     for key, val in user_profile.__dict__.iteritems():

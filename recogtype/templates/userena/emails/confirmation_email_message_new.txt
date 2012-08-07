@@ -1,0 +1,20 @@
+{% autoescape off %}
+{% if user.first_name %}Dear {{ user.first_name }},
+{% endif %}
+As requested, your email address will be updated.
+
+
+Please confirm this email address by clicking on the link below:
+
+{{ protocol }}://{{ site.domain }}{% url userena_email_confirm confirmation_key %}
+
+If you received this email unintentionally, please disregard.
+
+As always, thank-you for your interest and contribution to the RecogType project.
+
+Sincerely,
+
+Adam Gribble
+Creator of RecogType
+
+{% endautoescape %}

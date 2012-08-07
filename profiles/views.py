@@ -27,7 +27,7 @@ def signout(request):
    messages.success(request, 'Thank-you for your time! You\'ve been \
                               succesfully logged out.')
    logout(request)
-   return HttpResponseRedirect('http://localhost:8000')
+   return HttpResponseRedirect('/')
 
 """
 @secure_required

@@ -31,6 +31,12 @@ urlpatterns = patterns('',
         {'edit_profile_form': EditProfileFormMod},
         name='profiles_edit'),
 
+    # Activate
+    url(r'^profiles/activate/(?P<activation_key>\w+)/$',
+       userena_views.activate,
+       {'success_url': '/dashboard/%(username)s'}, 
+       name='profiles_activate'),
+
     # Reset password
     url(r'^password/reset/$',
        auth_views.password_reset,
