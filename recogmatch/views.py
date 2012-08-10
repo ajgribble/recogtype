@@ -8,10 +8,14 @@ from django.template.defaultfilters import slugify
 from django.template import RequestContext
 from django.shortcuts import render
 from django.contrib import messages
+from django.conf import settings
 
 from profiles.models import Profile
+
 from recogmatch.models import Challenge, RawSample, BioTemplate
 from recogmatch.forms import SubmitDataForm
+
+from recogtype_backend import RecogDataSample, RecogNoveltyDetector
 
 from datetime import date, timedelta
 from math import ceil
@@ -138,6 +142,9 @@ def challenge(request, username, challenge=None,
 @login_required
 @csrf_exempt
 def submit_raw_data(request, username, challenge_id):
+
+    # From the submitted challenge, the raw data object is created and stored 
+    # for future use.
     sample = RawSample()
     sample.user = User.objects.get(username=username)
     sample.data = request.POST['raw_data']
@@ -147,6 +154,22 @@ def submit_raw_data(request, username, challenge_id):
     sample.keyboard = request.POST['keyboard']
     sample.save()
     messages.success(request, 'Challenge complete!')
+
+    # After the raw data has been saved the backend is trained
+    rnd = RecogNoveltyDetector(sample.user.id)
+    model = rnd.train(settings.RECOGTYPE_KS_EXAMINED, 
+                    settings.RECOGTYPE_FEATURE_LIST)
     
-    return HttpResponse("Success")
+    # Check if a model has already been created for the user
+    # If there is no current model, create one
+    try:
+        current_model = BioTemplate.objects.get(user_id=sample.user.id)
+    except:
+        current_model = BioTemplate()
+        current_model.user_id = sample.user.id
+
+    current_model.bio_model = model
+    current_model.save()
+    
+    return HttpResponse("Success!")
     
