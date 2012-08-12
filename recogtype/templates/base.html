@@ -73,21 +73,21 @@
                 {% if request.session.train_lock %}
                     <a href="#" class="disabled">Train System <span class="lock">Locked</span></a>
                 {% elif progress.t_challenges_left > 0 %} 
-                    <a href="{% url match_template user.username %}">Train System 
+                    <a href="{% url match_train_list user.username %}">Train System 
                     <span>{{ progress.t_challenges_left }}</span></a>
                 {% else %}
-                    <a href="{% url match_template user.username %}">Train System </a>
+                    <a href="{% url match_train_list user.username %}">Train System </a>
                 {% endif %}
                 </li>
                 <li class="subitem3">
-                    <a href="#" class="disabled">Challenge System <span class="lock">Disabled</span></a>
-                {% comment %}
                 {% if request.session.challenge_lock %}
-                    <a href="#" class="disabled">Challenge System <span class="lock">Locked</span></a>
+                    <a href="#" class="disabled">Test System <span class="lock">Locked</span></a>
+                {% elif progress.c_challenges_left > 0 %}
+                    <a href="{% url match_challenge_list user.username %}">Test System
+                    <span>{{ progress.c_challenges_left }}</span></a>
                 {% else %}
-                    <a href="#">Challenge System</a>
+                    <a href="{% url match_challenge_list user.username %}">Test System</a>
                 {% endif %}
-                {% endcomment %}
                 </li>
             </ul>
         </li>

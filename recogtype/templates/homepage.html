@@ -2,16 +2,10 @@
 {% block title %}Welcome{% endblock title %}
 
 {% block scripts %}
-<noscript>Please enable Javascript to see the email address</noscript>
-<script type="text/javascript">
-$(function() {
-    // Function to give challenge instructions ability to expand/contract
-    $('.expander').click(function(e) {
-        e.preventDefault();
-        $(this).closest('a').next('.expandable').toggle();
-    });
-});
-</script>
+<script src="{{ STATIC_URL }}javascript/animation/homepage.js" 
+        type="text/javascript"></script>
+<script src="{{ STATIC_URL }}javascript/extras/site_statistics.js" 
+        type="text/javascript"></script>
 {% endblock scripts %}
 {% block content %}
 

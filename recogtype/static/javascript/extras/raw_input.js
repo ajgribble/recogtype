@@ -46,16 +46,16 @@ $(function() {
                     });
     $('#raw_data_form').submit(function() {
         var raw_data = JSON.stringify(data);
-        console.log(raw_data)
         var keyboard = $('#id_keyboard').val();
         if (validator.form()) {
             $.post(match_submit,
                     { raw_data: raw_data,
                       browser: browser,
                       os: os,
-                      keyboard: keyboard },
+                      keyboard: keyboard,
+                      model_action: model_action},
                       function(responseData) {
-                            window.location.replace(guide_user); 
+                            window.location.replace(guide_user + responseData + '/'); 
                             //alert(responseData);
                     });
             }

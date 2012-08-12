@@ -28,6 +28,14 @@ var complete = "{{ progress.overall_complete }}";
         <div id="progress_meter">
         </div>
     </div>
+    {% if result %}
+    <h3>System Challenge Results:</h3>
+    <p>Features Passed: {{ result.pass }}</p>
+    <p>Features Failed: {{ result.fail }}</p>
+    <p>Percent Passed: {{ result.percent_pass|floatformat:"-1" }}%</p>
+    <p>Sample Score: {{ result.score|title }}</p>
+    {% endif %}
+    <br />
     <h3>Mandatory Tasks:</h3>
     {% if not mandatory %}
         <p>You're fully up to date!</p>
@@ -35,6 +43,9 @@ var complete = "{{ progress.overall_complete }}";
         {% for item in mandatory %}
             {% if item == 'train' %}
             <p>Please complete a minimum of {{ progress.t_challenges_needed }} training 
+            challenges.</p>
+            {% elif item == 'test' %}
+            <p>Please complete a minimum of {{ progress.c_challenges_needed }} testing 
             challenges.</p>
             {% else %}
             <p>Update your profile with your {{ item }}.</p>
@@ -49,6 +60,8 @@ var complete = "{{ progress.overall_complete }}";
         {% for item in suggested %}
             {% if item == 'train' %}
             <p>Complete more training challenges to increase your model's accuracy.</p>
+            {% elif item == 'test' %}
+            <p>You can always keep testing the system, the more samples the better!</p>
             {% else %} 
             <p>Update your profile with your {{ key }}.</p>
             {% endif %}
