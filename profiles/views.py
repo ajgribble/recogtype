@@ -5,7 +5,7 @@ from django.template import RequestContext
 from django.contrib.auth.models import User
 from django.contrib.auth import logout, authenticate
 from django.contrib import messages
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext as _
 
@@ -22,6 +22,8 @@ from recogmatch.views import guide_user
 
 from guardian.decorators import permission_required_or_403 
 
+import json
+
 @login_required
 def signout(request):
    messages.success(request, 'Thank-you for your time! You\'ve been \
@@ -29,39 +31,6 @@ def signout(request):
    logout(request)
    return HttpResponseRedirect('/')
 
-"""
-@secure_required
-def signup(request):
-    if request.method == "POST":
-        sform = SignupForm(request.POST)
-        # pform = ProfileForm(request.POST, instance=Profile())
-        if sform.is_valid(): # and pform.is_valid():
-            user = sform.save()
-            user = authenticate(username=request.POST['username'], 
-                                password=request.POST['password1'])
-            pform = ProfileForm(request.POST, instance=Profile())
-            if pform.is_valid():
-                profile = pform.save(commit=False)
-                profile.user = user
-                profile = pform.save()
-   
-            messages.success(request, 'Registration complete!')
-
-            redirect_to = reverse('userena_signup_complete',
-                                  kwargs={'username': user.username})
-
-            if request.user.is_authenticated():
-                logout(request)
-            return redirect(redirect_to)
-
-    else:
-        sform = SignupForm()
-        pform = ProfileForm()
-        
-    return render_to_response('profiles/signup_form.html', {'sform': sform,
-                                                               'pform': pform},
-                                  context_instance=RequestContext(request))
-"""
 @secure_required
 @permission_required_or_403('change_profile', (get_profile_model(), 'user__username', 'username'))
 def profile_edit(request, username, edit_profile_form=EditProfileForm,
@@ -93,8 +62,11 @@ def profile_edit(request, username, edit_profile_form=EditProfileForm,
                 messages.success(request, _('Your profile has been updated.'),
                                  fail_silently=True)
 
-            if success_url: redirect_to = success_url
-            else: redirect_to = reverse('userena_profile_detail', kwargs={'username': username})
+            if success_url: 
+                redirect_to = success_url % {'username': user.username }
+            else: 
+                redirect_to = reverse('userena_profile_detail', 
+                kwargs={'username': username})
             return redirect(redirect_to)
 
     if not extra_context: extra_context = dict()
@@ -105,3 +77,20 @@ def profile_edit(request, username, edit_profile_form=EditProfileForm,
     return direct_to_template(request,
                               template_name,
                               extra_context=extra_context)
+
+def get_user_stats(request):
+    user_count = Profile.objects.count()
+    country_count = Profile.objects.values_list('country').distinct().count()
+    language_count = Profile.objects.values_list('language').distinct().count()
+    counts = json.dumps({
+                            'users': user_count,
+                            'countries': country_count,
+                            'languages': language_count
+                        })
+
+    return HttpResponse(counts)
+
+def verify_email(request):
+    email_existence = User.objects.filter(email=request.POST['email']).exists()
+
+    return HttpResponse(email_existence)

@@ -28,7 +28,8 @@ urlpatterns = patterns('',
         name='profiles_signout'),
     url(r'^profiles/(?P<username>[\.\w]+)/edit/$',
         profiles_views.profile_edit,
-        {'edit_profile_form': EditProfileFormMod},
+        {'edit_profile_form': EditProfileFormMod,
+         'success_url': '/dashboard/%(username)s'},
         name='profiles_edit'),
 
     # Activate
@@ -63,6 +64,14 @@ urlpatterns = patterns('',
        userena_views.direct_to_user_template,
        {'template_name': 'profiles/password_complete.html'},
        name='profiles_password_change_complete'),
+
+    # Ajax Calls
+    url(r'^user_stats/',
+       profiles_views.get_user_stats,
+       name='get_user_stats'),
+    url(r'^verify_email/',
+       profiles_views.verify_email,
+       name='verify_email'),
     
     # Directive Package URLs
     url(r'^profiles/', include('userena.urls')),

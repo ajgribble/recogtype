@@ -166,6 +166,8 @@ def guide_user(request, username, template_name='recogmatch/dashboard.html',
             result['score'] = 'border line fail'
         else:
             result['score'] = 'fail'
+    else:
+        result = None
 
     return direct_to_template(request, template_name,
                              {'mandatory': mandatory,

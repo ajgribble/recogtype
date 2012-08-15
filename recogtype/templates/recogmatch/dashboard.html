@@ -20,13 +20,13 @@ var complete = "{{ progress.overall_complete }}";
         {% endif %}
         RecogType Progress</h3>
     <div id="progress_container">
+        <div id="progress_meter">
+        </div>
         {% if progress.overall_complete > 100 %}
         <span>100% Complete</span>
         {% else %}
         <span>{{ progress.overall_complete|floatformat }}% Complete</span>
         {% endif %}
-        <div id="progress_meter">
-        </div>
     </div>
     {% if result %}
     <h3>System Challenge Results:</h3>
@@ -35,7 +35,8 @@ var complete = "{{ progress.overall_complete }}";
     <p>Percent Passed: {{ result.percent_pass|floatformat:"-1" }}%</p>
     <p>Sample Score: {{ result.score|title }}</p>
     {% endif %}
-    <br />
+    <p>Using the nav pane to the left as your guide, complete any tasks 
+    listed below.</p><br />
     <h3>Mandatory Tasks:</h3>
     {% if not mandatory %}
         <p>You're fully up to date!</p>

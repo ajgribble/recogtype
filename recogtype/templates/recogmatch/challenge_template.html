@@ -26,7 +26,7 @@
 {% with user.first_name as user %}
     {% include template_path %}
 {% endwith %}
-<a id="instructions_expand" href="#">Challenge Instructions [+]</a>
+<a id="instructions_expand" href="#">Challenge Instructions (Click to Toggle)</a>
 <p id="challenge_instructions">
     {{ challenge.instructions|linenumbers|linebreaksbr }}
 </p>

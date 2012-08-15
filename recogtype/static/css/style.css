@@ -489,7 +489,7 @@ div.expandable
 {
     font-size: 20px;
 }
-h3.notes_header
+h3.inner_header
 {
     margin: 20px 0px;
 }
@@ -521,19 +521,27 @@ h3.notes_header
 {
     margin-top: 20px;
 }
-div.site_info
+div.contained_info
 {
     border: 1px solid #FFF;
     border-radius: 10px;
     margin: 20px;
     padding: 10px;
 }
-div.site_info ul.outer li
+div.contained_info ul.outer li, li#stats
 {
     font-size: medium;
     list-style-type: none;
     margin-left: 20px;
     margin-bottom: 20px;
+}
+li#stats
+{
+    font-weight: bolder;
+}
+li#stats span.stat
+{
+    color: #FFA200;
 }
 ul.outer li ul.inner
 {
@@ -626,13 +634,12 @@ div#progress_meter
 }
 div#progress_container span
 {
-    height: 44px;
-    position: absolute;
-    top: 50%;
-    margin-top: -100px;
+    position: relative;
+    float: left;
     margin-left: 5px;
+    margin-top: -70px;
     font-size: 24px;
-    z-index: 1000;
+    z-index: 10000;
 }
     
 /* ==========================================================================
@@ -951,7 +958,8 @@ a#instructions_expand
 }
 p#challenge_instructions
 {
-    display: none;
+    /*display: none;*/
+    margin-bottom: 20px;
 }
 a.challenge_complete, a.challenge_complete:hover
 {
