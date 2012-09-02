@@ -34,6 +34,7 @@ var complete = "{{ progress.overall_complete }}";
     <p>Features Failed: {{ result.fail }}</p>
     <p>Percent Passed: {{ result.percent_pass|floatformat:"-1" }}%</p>
     <p>Sample Score: {{ result.score|title }}</p>
+    <br />
     {% endif %}
     <p>Using the nav pane to the left as your guide, complete any tasks 
     listed below.</p><br />
@@ -47,7 +48,8 @@ var complete = "{{ progress.overall_complete }}";
             challenges.</p>
             {% elif item == 'test' %}
             <p>Please complete a minimum of {{ progress.c_challenges_needed }} testing 
-            challenges.</p>
+            challenges. Please note that unlike training challenges, testing challenges 
+            may be repeated.</p>
             {% else %}
             <p>Update your profile with your {{ item }}.</p>
             {% endif %}

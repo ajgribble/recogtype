@@ -47,6 +47,8 @@ $(function() {
     $('#raw_data_form').submit(function() {
         var raw_data = JSON.stringify(data);
         var keyboard = $('#id_keyboard').val();
+        console.log(raw_data);
+        console.log(model_action);
         if (validator.form()) {
             $.post(match_submit,
                     { raw_data: raw_data,
@@ -55,7 +57,7 @@ $(function() {
                       keyboard: keyboard,
                       model_action: model_action},
                       function(responseData) {
-                            window.location.replace(guide_user + responseData + '/'); 
+                            window.location.replace(guide_user + responseData); 
                             //alert(responseData);
                     });
             }

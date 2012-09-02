@@ -65,6 +65,9 @@
                 {% if progress.t_challenges_left > 0 and request.session.profile_count == 0 %}
                     <span>{{ progress.t_challenges_left }}</span>
                 {% endif %}
+                {% if progress.c_challenges_left > 0 %}
+                    <span>{{ progress.c_challenges_left }}</span>
+                {% endif %}
                 </a>
             <ul>
                 <li class="subitem1">

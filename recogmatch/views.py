@@ -173,7 +173,8 @@ def guide_user(request, username, template_name='recogmatch/dashboard.html',
                              {'mandatory': mandatory,
                               'suggested': suggested,
                               'progress': progress,
-                              'result': result})
+                              'result': result,
+                              'test': t_complete_count})
 
 @login_required
 def challenge(request, username, model_action, challenge=None,
@@ -263,12 +264,12 @@ def submit_raw_data(request, username, challenge_id):
                     'kernel': 'linear'}
 
         # Initialize the novelty detector
-        rnd = RecogNoveltyDetector(sample.user.id)
-        result = rnd.challenge(train_data,
-                               test_data,
-                               settings.RECOGTYPE_KS_EXAMINED, 
-                               settings.RECOGTYPE_FEATURE_LIST,
-                               params)
+        rnd = RecogNoveltyDetector(settings.RECOGTYPE_KS_EXAMINED,
+                                   settings.RECOGTYPE_FEATURE_LIST) 
+
+        # Train then test the novelty detector
+        rnd.train(train_data, params)
+        result = rnd.challenge(test_data)
 
         # Modify result so it's not passed in the clear
         result_mod = str(result[0]) + '&' + str(result[1])
@@ -286,5 +287,6 @@ def submit_raw_data(request, username, challenge_id):
         current_model.bio_model = model
         current_model.save()
         """
-    return HttpResponse(result_mod)
+        return HttpResponse(result_mod + '/')
+    return HttpResponse("")
     

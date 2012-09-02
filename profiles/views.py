@@ -1,21 +1,19 @@
 from django.views.generic.simple import direct_to_template
 from django.core.urlresolvers import reverse
-from django.shortcuts import redirect, render_to_response, get_object_or_404
-from django.template import RequestContext
+from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.models import User
-from django.contrib.auth import logout, authenticate
+from django.contrib.auth import logout
 from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext as _
 
-from userena.forms import SignupForm, EditProfileForm
+from userena.forms import EditProfileForm
 from userena.decorators import secure_required
 from userena import views as userena_views
 from userena.utils import get_profile_model
 from userena import settings as userena_settings
 
-from profiles.forms import EditProfileFormMod
 from profiles.models import Profile
 
 from recogmatch.views import guide_user
@@ -26,7 +24,7 @@ import json
 
 @login_required
 def signout(request):
-   messages.success(request, 'Thank-you for your time! You\'ve been \
+   messages.success(request, 'Thank you for your time! You\'ve been \
                               succesfully logged out.')
    logout(request)
    return HttpResponseRedirect('/')

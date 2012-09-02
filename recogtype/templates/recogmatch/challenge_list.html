@@ -1,0 +1,43 @@
+{% extends 'recogmatch/dashboard.html' %}
+
+{% block title %}Biometric Template{% endblock title %}
+
+{% block recogmatch_content %}
+
+<div class="grid_9 container">
+    {% if model_action == 'train' %}
+    <h3>Training Challenges to Be Completed:</h3><br />
+    <ul>
+        {% for key, val in url_chunks.items %}
+            {% if key not in completed %}
+            <li>
+                <a href="{% url match_train_item user.username val %}">{{ key }}</a>
+            </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    <h3>Training Challenges Completed:</h3><br />
+    <ul>
+        {% for key, val in url_chunks.items %} 
+            {% if key in completed %}
+            <li>
+                <a class="challenge_complete" href="#">{{ key }}</a>
+            </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    {% else %}
+    <h3>Testing Challenges:</h3><br />
+    <ul>
+        {% for key, val in url_chunks.items %}
+            {% if key not in completed %}
+            <li>
+                <a href="{% url match_challenge_item user.username val %}">{{ key }}</a>
+            </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{% endblock recogmatch_content %}
